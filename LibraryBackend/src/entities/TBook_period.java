@@ -1,4 +1,5 @@
 package entities;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,7 +22,6 @@ public class TBook_period extends TBook implements Serializable {
 
 	@Override
 	public boolean period_pass(Object data) {
-		Date date = TFactory.mdays((String) data);
 		Date now = TFactory.mdays("0");
 		if (getPeriod() == null) {
 			return true;

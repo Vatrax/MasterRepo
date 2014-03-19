@@ -15,6 +15,7 @@ import entities.TBook;
 import entities.TTitle_book;
 
 public class TFacade implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private ArrayList<TTitle_book> mTitle_books = new ArrayList<TTitle_book>();
 
