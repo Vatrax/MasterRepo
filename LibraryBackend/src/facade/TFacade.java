@@ -84,7 +84,7 @@ public class TFacade implements Serializable {
 		return null;
 	}
 
-	public synchronized TBook Search_accessible_book(String data1[], Object data2) {
+	public synchronized TBook Search_accessible_book(String data1[], String data2) {
 		TFactory factory = new TFactory();
 		TTitle_book title_book_help = factory.create_title_book(data1);
 		TTitle_book title_exist = search_title_book(title_book_help);
