@@ -21,7 +21,7 @@ public class TBook_period extends TBook implements Serializable {
 	}
 
 	@Override
-	public boolean period_pass(Object data) {
+	public boolean period_pass(String data) {
 		Date now = TFactory.mdays("0");
 		if (getPeriod() == null) {
 			return true;

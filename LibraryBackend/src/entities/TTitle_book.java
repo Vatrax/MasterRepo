@@ -1,4 +1,5 @@
 package entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -115,7 +116,7 @@ public class TTitle_book implements Serializable {
 		return null;
 	}
 
-	public TBook search_accessible_book(Object data) {
+	public TBook search_accessible_book(String data) {
 		Iterator<TBook> iter = mBooks.iterator();
 		while (iter.hasNext()) {
 			TBook book = iter.next();

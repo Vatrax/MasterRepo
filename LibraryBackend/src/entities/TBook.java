@@ -1,4 +1,5 @@
 package entities;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -53,12 +54,8 @@ public class TBook implements Serializable {
 		return mTitle_book.toString() + " Number: " + number;
 	}
 
-	public boolean period_pass(Object data) {
-		try {
-			return ((TBook_period) this).period_pass(data);
-		} catch (Exception e) {
-			return false;
-		}
+	public boolean period_pass(String data) {
+		return false;
 	}
 
 	@Override
