@@ -7,6 +7,7 @@ public class TBook implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int number;
 	private TTitle_book mTitle_book;
+	private Date loanUntil = null;
 
 	public TTitle_book getmTitle_book() {
 		return mTitle_book;
@@ -25,19 +26,10 @@ public class TBook implements Serializable {
 	}
 
 	public Date getPeriod() {
-		try {
-			return ((TBook_period) this).getPeriod();
-		} catch (Exception e) {
-			return null;
-		}
+		return null;
 	}
 
 	public void setPeriod(Date period) {
-		try {
-			((TBook_period) this).setPeriod(period);
-		} catch (Exception e) {
-			;
-		}
 	}
 
 	@Override
@@ -89,5 +81,13 @@ public class TBook implements Serializable {
 		} catch (Exception e) {
 			System.exit(-1);
 		}
+	}
+
+	public Date getLoanUntil() {
+		return loanUntil;
+	}
+
+	public void setLoanUntil(Date loan) {
+		this.loanUntil = loan;
 	}
 }

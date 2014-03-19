@@ -19,9 +19,6 @@ public class TFacade implements Serializable {
 
 	private ArrayList<TTitle_book> mTitle_books = new ArrayList<TTitle_book>();
 
-	public TFacade() {
-	}
-
 	public ArrayList<TTitle_book> getmTitle_books() {
 		return mTitle_books;
 	}

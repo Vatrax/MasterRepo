@@ -1,7 +1,10 @@
 package entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import facade.TFactory;
 
 public class TUser implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,9 +23,11 @@ public class TUser implements Serializable {
 		return id;
 	}
 
-	public synchronized void loanBook(TBook book, Object period) {
-		book.startPeriod(period);
-		mBooks.add(book);
+	public synchronized void loanBook(TBook book, String period) {
+		if (!book.period_pass(period) && book.getLoanUntil() == null) {
+			mBooks.add(book);
+			book.setLoanUntil(TFactory.mdays(period));
+		}
 	}
 
 	public synchronized void giveBackBook(TBook book) {
@@ -32,7 +37,7 @@ public class TUser implements Serializable {
 			search = iter.next();
 		}
 		if (book.equals(search)) {
-			search.setPeriod(null);
+			search.setLoanUntil(null);
 			iter.remove();
 		}
 	}
