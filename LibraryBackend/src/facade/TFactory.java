@@ -62,7 +62,7 @@ public class TFactory {
         case 0: {
             if( data.length != 2 )
                 return null;
-            TBook book = new TBook_period();
+            TBook book = new TBook();
             book.setNumber(Integer.parseInt(data[1]));
             return book;
         }
