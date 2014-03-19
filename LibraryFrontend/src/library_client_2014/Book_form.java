@@ -26,7 +26,6 @@ import javax.swing.table.AbstractTableModel;
 
 public class Book_form extends JPanel implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JTextField number;
 	private JTextField period;
@@ -34,7 +33,7 @@ public class Book_form extends JPanel implements ActionListener {
 	int row;
 	Client client;
 	MyTableModel model;
-	JComboBox<String> books;
+	JComboBox books;
 
 	public Book_form(Client client) {
 		super();
@@ -64,7 +63,7 @@ public class Book_form extends JPanel implements ActionListener {
 		add_book.addActionListener(this);
 		JLabel lbooks = new JLabel("Books");
 		add(lbooks);
-		books = new JComboBox<String>();
+		books = new JComboBox();
 		add(books);
 	}
 
@@ -81,7 +80,7 @@ public class Book_form extends JPanel implements ActionListener {
 		return data;
 	}
 
-	private void list_content(ArrayList<String> col, JComboBox<String> list) {
+	private void list_content(ArrayList<String> col, JComboBox list) {
 		String s;
 		list.removeAllItems();
 		Iterator<String> iterator = col.iterator();
@@ -116,7 +115,7 @@ public class Book_form extends JPanel implements ActionListener {
 				what_book_type = "1";
 			}
 			String data2[] = { what_book_type, number.getText(), period.getText() };
-			ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getBooks();
+			ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getbooks();
 			if (help3 != null) {
 				list_content(help3, books);
 			}
@@ -144,8 +143,6 @@ public class Book_form extends JPanel implements ActionListener {
 	}
 
 	class MyTableModel extends AbstractTableModel {
-
-		private static final long serialVersionUID = 1L;
 
 		private String[] columnNames = { "Publisher", "ISBN", "Title", "Author", "Actor" };
 		private Object[][] data;
