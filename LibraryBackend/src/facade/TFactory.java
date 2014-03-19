@@ -60,15 +60,11 @@ public class TFactory {
     public TBook create_book (String[] data) {
         switch(Integer.parseInt(data[0])) {
         case 0: {
-            if( data.length != 2 )
-                return null;
-            TBook book = new TBook_period();
+            TBook book = new TBook();
             book.setNumber(Integer.parseInt(data[1]));
             return book;
         }
         case 1: {
-            if( data.length != 3 )
-                return null;
             TBook_period period = new TBook_period();
             period.setNumber(Integer.parseInt(data[1]));
             period.startPeriod(data[2]);
@@ -80,4 +76,3 @@ public class TFactory {
     }
 
 }
-
