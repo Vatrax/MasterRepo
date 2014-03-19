@@ -115,7 +115,7 @@ public class Book_form extends JPanel implements ActionListener {
 				what_book_type = "1";
 			}
 			String data2[] = { what_book_type, number.getText(), period.getText() };
-			ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getbooks();
+			ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getBooks();
 			if (help3 != null) {
 				list_content(help3, books);
 			}
