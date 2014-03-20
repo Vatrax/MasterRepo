@@ -40,7 +40,7 @@ public class Book_form extends JPanel implements ActionListener {
 		this.client = client;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		model = new MyTableModel();
-		// Object[][] data = {{"", "",# "", "", ""}};
+		// Object[][] data = {{"", "", "", "", ""}};
 		// model.setData(data);
 		table_content();
 		table = new JTable(model);
@@ -178,11 +178,7 @@ public class Book_form extends JPanel implements ActionListener {
 
 		@Override
 		public boolean isCellEditable(int row, int col) {
-			if (col < 0) {
-				return false;
-			} else {
-				return true;
-			}
+			return col < 0;
 		}
 
 		@Override

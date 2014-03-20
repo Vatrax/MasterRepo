@@ -75,12 +75,7 @@ public class TBook implements Serializable {
 		return true;
 	}
 
-	public void startPeriod(Object data) {
-		try {
-			((TBook_period) this).startPeriod(data);
-		} catch (Exception e) {
-			System.exit(-1);
-		}
+	public void startPeriod(String data) {
 	}
 
 	public Date getLoanUntil() {

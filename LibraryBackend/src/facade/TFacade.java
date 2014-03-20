@@ -19,6 +19,8 @@ public class TFacade implements Serializable {
 
 	private ArrayList<TTitle_book> mTitle_books = new ArrayList<TTitle_book>();
 
+	private TFactory factory = new TFactory();
+
 	public ArrayList<TTitle_book> getmTitle_books() {
 		return mTitle_books;
 	}
@@ -43,8 +45,8 @@ public class TFacade implements Serializable {
 	}
 
 	public synchronized TTitle_book search_title_book(TTitle_book title_book) {
-		int idx;
-		if ((idx = mTitle_books.indexOf(title_book)) != -1) {
+		int idx = mTitle_books.indexOf(title_book);
+		if (idx != -1) {
 			title_book = mTitle_books.get(idx);
 			return title_book;
 		}
@@ -52,7 +54,6 @@ public class TFacade implements Serializable {
 	}
 
 	public synchronized TTitle_book add_title_book(String data[]) {
-		TFactory factory = new TFactory();
 		TTitle_book title_book = factory.create_title_book(data);
 		if (search_title_book(title_book) == null) {
 			mTitle_books.add(title_book);
@@ -63,8 +64,7 @@ public class TFacade implements Serializable {
 
 	public synchronized TTitle_book add_book(String data1[], String data2[]) {
 		TTitle_book help1, help2 = null;
-		TFactory fabryka = new TFactory();
-		help1 = fabryka.create_title_book(data1);
+		help1 = factory.create_title_book(data1);
 		if ((help2 = search_title_book(help1)) != null) {
 			help2.add_book(data2);
 		}
@@ -72,7 +72,6 @@ public class TFacade implements Serializable {
 	}
 
 	public synchronized ArrayList<String> Search_title_book(String data[]) {
-		TFactory factory = new TFactory();
 		TTitle_book title_book = factory.create_title_book(data);
 		TTitle_book title_book_ = search_title_book(title_book);
 		if (title_book_ != null) {
@@ -82,7 +81,6 @@ public class TFacade implements Serializable {
 	}
 
 	public synchronized TBook Search_accessible_book(String data1[], String data2) {
-		TFactory factory = new TFactory();
 		TTitle_book title_book_help = factory.create_title_book(data1);
 		TTitle_book title_exist = search_title_book(title_book_help);
 		if (title_exist != null) {

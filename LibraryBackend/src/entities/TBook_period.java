@@ -26,13 +26,12 @@ public class TBook_period extends TBook implements Serializable {
 		if (getPeriod() == null) {
 			return true;
 		}
-		return now.after(getPeriod()) ? true : false;
+		return now.after(getPeriod());
 	}
 
 	@Override
-	public void startPeriod(Object data) {
-		Date date = TFactory.mdays((String) data);
-		setPeriod(date);
+	public void startPeriod(String data) {
+		setPeriod(TFactory.mdays(data));
 	}
 
 	@Override

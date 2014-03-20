@@ -77,20 +77,10 @@ public class TTitle_book implements Serializable {
 	}
 
 	public String getActor() {
-		try {
-			return ((TTitle_book_on_tape) this).getActor();
-		} catch (Exception e) {
-			return "";
-		}
+		return "";
 	}
 
 	public void setActor(String actor) {
-
-		try {
-			((TTitle_book_on_tape) this).setActor(actor);
-		} catch (Exception e) {
-			;// this = new TTitle_book_on_tape();
-		}
 	}
 
 	@Override
@@ -104,13 +94,12 @@ public class TTitle_book implements Serializable {
 		newbook.setmTitle_book(this); // Or change the Tbook.equals method
 		if (search_book(newbook) == null) {
 			mBooks.add(newbook);
-			return;
 		}
 	}
 
 	public TBook search_book(TBook book) {
-		int idx;
-		if ((idx = mBooks.indexOf(book)) != -1) {
+		int idx = mBooks.indexOf(book);
+		if (idx != -1) {
 			return mBooks.get(idx);
 		}
 		return null;
