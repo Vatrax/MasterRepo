@@ -4,8 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import facade.TFactory;
 
+@Entity
 public class TTitle_book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,6 +20,10 @@ public class TTitle_book implements Serializable {
 	private String title;
 	private String author;
 	private ArrayList<TBook> mBooks = new ArrayList<TBook>();
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 
 	public String getISBN() {
 		return ISBN;
@@ -114,6 +124,14 @@ public class TTitle_book implements Serializable {
 			}
 		}
 		return null;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
