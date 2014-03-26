@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.ejb.EJB;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -18,7 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import facade.TFacade;
+import facade.Facade;
 
 /**
  * 
@@ -31,7 +32,9 @@ public class Client implements ActionListener {
 	final static String TITLE = "Title form";
 	final static String BOOK = "Book form";
 	final static String LOAN = "Loan book";
-	TFacade facade = new TFacade();
+
+	@EJB
+	Facade facade;
 
 	public JMenuBar createMenuBar() {
 		JMenuBar menuBar;
@@ -90,11 +93,11 @@ public class Client implements ActionListener {
 		return menuBar;
 	}
 
-	public TFacade getFacade() {
+	public Facade getFacade() {
 		return facade;
 	}
 
-	public void setFacade(TFacade facade) {
+	public void setFacade(Facade facade) {
 		this.facade = facade;
 	}
 
