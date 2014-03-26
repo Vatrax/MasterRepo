@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import entities.TBook;
 import entities.TTitle_book;
+import entities.TUser;
 
 public class TFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +21,8 @@ public class TFacade implements Serializable {
 	private ArrayList<TTitle_book> mTitle_books = new ArrayList<TTitle_book>();
 
 	private TFactory factory = new TFactory();
+
+	private ArrayList<TUser> mUsers = new ArrayList<>();
 
 	public ArrayList<TTitle_book> getmTitle_books() {
 		return mTitle_books;
@@ -108,6 +111,22 @@ public class TFacade implements Serializable {
 			}
 			System.out.println();
 		}
+	}
+
+	public synchronized TBook loan_book(String[] data1, String data2, TUser user) {
+		TBook book = Search_accessible_book(data1, data2);
+		if (book == null) {
+			return null;
+		}
+		int i = 0;
+		while (mUsers.get(i).equals(user) || mUsers.size() < i) {
+			i++;
+		}
+		if (mUsers.get(i).equals(user)) {
+			mUsers.get(i).loanBook(book, data2);
+		}
+
+		return book;
 	}
 
 	public static void main(String t[]) {

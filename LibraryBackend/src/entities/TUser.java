@@ -7,7 +7,9 @@ import java.util.Iterator;
 import facade.TFactory;
 
 public class TUser implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+
 	private static long lastUserId = 0;
 
 	private ArrayList<TBook> mBooks = new ArrayList<TBook>();
@@ -51,4 +53,14 @@ public class TUser implements Serializable {
 			System.out.println(b.toString());
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		TUser other = (TUser) obj;
+		return this.id == other.id;
+	}
+
 }
