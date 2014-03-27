@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.rmi.PortableRemoteObject;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -34,7 +38,7 @@ public class Client implements ActionListener {
 	final static String LOAN = "Loan book";
 
 	@EJB
-	Facade facade;
+	static Facade facade;
 
 	public JMenuBar createMenuBar() {
 		JMenuBar menuBar;
@@ -97,10 +101,6 @@ public class Client implements ActionListener {
 		return facade;
 	}
 
-	public void setFacade(Facade facade) {
-		this.facade = facade;
-	}
-
 	public Container createContentPane() {
 		// Create the content-pane-to-be.
 
@@ -156,7 +156,10 @@ public class Client implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NamingException {
+		Context ctx = new InitialContext();
+		Object o = ctx.lookup("java:global/TestingBean");
+		facade = (Facade) PortableRemoteObject.narrow(o, Facade.class);
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
 		java.awt.EventQueue.invokeLater(new Runnable() {

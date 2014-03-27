@@ -11,6 +11,7 @@ package facade;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import entities.TBook;
@@ -18,6 +19,7 @@ import entities.TTitle_book;
 import entities.TUser;
 
 @Stateless
+@EJB(name = "java:global/TestingBean")
 public class TFacade implements Serializable, Facade {
 	private static final long serialVersionUID = 1L;
 
