@@ -158,7 +158,7 @@ public class Client implements ActionListener {
 
 	public static void main(String[] args) throws NamingException {
 		Context ctx = new InitialContext();
-		Object o = ctx.lookup("java:global/TestingBean");
+		Object o = ctx.lookup("java:global/");
 		facade = (Facade) PortableRemoteObject.narrow(o, Facade.class);
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
