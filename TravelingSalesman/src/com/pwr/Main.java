@@ -15,7 +15,12 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Give me number of Cities:");
 		int numberOfCities = new Scanner(System.in).nextInt();
-		List<String> generateCities = new DataGenerator().generateCities(numberOfCities);
+		List<String> generatedCities = new DataGenerator().generateCities(numberOfCities);
+		List<String> combinations = new Combinator().getCombinations(generatedCities);
+
+		for (String combination : combinations) {
+			System.out.println(combination);
+		}
 
 	}
 }
