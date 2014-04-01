@@ -25,7 +25,19 @@ public class Combinator {
 		cities.remove(cities.size() - 1);
 
 		createPermutations(cities, begin);
+		createCombinations(cities, begin);
+
 		return combinations;
+	}
+
+	private void createCombinations(List<String> cities, String begin) {
+		for (String city : cities) {
+			List<String> citiesLeft = new ArrayList<>(cities);
+			citiesLeft.remove(city);
+			createPermutations(citiesLeft, begin);
+			createCombinations(citiesLeft, begin);
+		}
+
 	}
 
 	private void createPermutations(List<String> cities, String begin) {
