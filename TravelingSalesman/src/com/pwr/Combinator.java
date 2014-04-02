@@ -11,21 +11,28 @@ import java.util.List;
  */
 public class Combinator {
 
+    private List<String> cities;
 	private List<String> combinations;
-	private String end;
+	private String start, end;
 
-	public Combinator() {
-		combinations = new ArrayList<>();
+	public Combinator(List<String> generatedCities) {
+		cities = new ArrayList<>(generatedCities);
+        combinations = new ArrayList<>();
 	}
 
-	public List<String> getCombinations(List<String> cities) {
-		String begin = cities.get(0);
-		end = cities.get(cities.size() - 1);
-		cities.remove(0);
-		cities.remove(cities.size() - 1);
+    public void prepareData() {
+        // Save start and end points
+        start = cities.get(0);
+        end = cities.get(cities.size() - 1);
 
-		createPermutations(cities, begin);
-		createCombinations(cities, begin);
+        // Remove them from array
+        cities.remove(0);
+        cities.remove(cities.size() - 1);
+    }
+
+	public List<String> getCombinations() {
+		createPermutations(cities, start);
+		createCombinations(cities, start);
 
 		return combinations;
 	}
