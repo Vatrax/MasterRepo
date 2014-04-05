@@ -12,14 +12,17 @@ import java.util.Scanner;
 public class Main {
 
     private static Combinator combinator;
+    private static DataGenerator dataGenerator;
     private static long startTime, endTime;
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		System.out.println("Give me number of Cities:");
-
         int numberOfCities = new Scanner(System.in).nextInt();
-		List<String> generatedCities = new DataGenerator().generateCities(numberOfCities);
+
+        dataGenerator = new DataGenerator(numberOfCities);
+
+		List<String> generatedCities = dataGenerator.generateCityNames();
 
         combinator = new Combinator(generatedCities);
         combinator.prepareData();
@@ -28,11 +31,12 @@ public class Main {
 		List<String> combinations = combinator.getCombinations();
         endTime = System.nanoTime();
 
-		for (String combination : combinations) {
-			System.out.println(combination);
-		}
+        System.out.println("COMBINATIONS:");
 
-        System.out.println("Elapsed time: " + (endTime - startTime)/1000 + " ms");
+//        for (String combination : combinations) {
+//			System.out.println("\t"+ combination);
+//		}
 
+        System.out.println("Elapsed time: " + (endTime - startTime)/1000000 + " ms");
 	}
 }
