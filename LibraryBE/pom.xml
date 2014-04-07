@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>LibraryBE</groupId>
 	<artifactId>LibraryBE</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>ejb</packaging>
 	<dependencies>
 		<dependency>
@@ -19,10 +19,10 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<sourceDirectory>ejbModule</sourceDirectory>
+		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
-				<directory>ejbModule</directory>
+				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
