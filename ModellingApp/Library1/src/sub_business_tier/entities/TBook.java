@@ -7,7 +7,7 @@ import java.util.Date;
 public class TBook implements Serializable {
 	private int number;
 	private TTitle_book mTitle_book;
-        private TLoanData loan;
+        private TLoanData loan; 
         
 	public TTitle_book getmTitle_book() {
 		return mTitle_book;

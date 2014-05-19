@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import sub_business_tier.entities.TLoanData;
@@ -53,33 +54,37 @@ public class Loan_form extends Show_book_titles_table implements ActionListener 
         addUserBtn = new JButton("Add user");
         addUserBtn.addActionListener( this );
         add(addUserBtn);
-        
-        
        }
 
  
     private void fillUsers() {
         usersCBx.removeAllItems();
-        List<TUser> items = client.getFacade().getmUsers();
-        for( TUser o : items)
-            usersCBx.addItem(o.getName());
+        List<String> items = client.getFacade().getUsers();
+        for( String o : items)
+            usersCBx.addItem(o);
     }   
-                TUser u = client.getFacade().addUser( addUserTF.getText().toString() );
+
 
    @Override
     public void actionPerformed(ActionEvent e) {
         JButton b = (JButton) e.getSource();
         if( b == addUserBtn ) {
-            TUser u = client.getFacade().addUser( addUserTF.getText().toString() );
+            client.getFacade().addUser( addUserTF.getText().toString() );
             fillUsers();
         }
         else if( b == loanBookBtn ) {
             try {
-                TLoanData loan = client.getFacade().loanBook(title(), period(),user());
+                Object loan = client.getFacade().loanBook(title(), period(),user());
+                String[][] books = client.getFacade().getUserBooks(user());
+                for(int i = 0; i < books.length; i++) {
+                    for(int j = 0; j < books[i].length; j++)
+                        System.out.print(books[i][j]+"  ");
+                    System.out.println();
+                }
             if( loan != null)
                 System.out.println(loan.toString());
             else
-                System.out.println("null");
+                JOptionPane.showMessageDialog(this, "Cannot borrow this book");
              }
              catch(Exception ex) {
                  ex.printStackTrace();

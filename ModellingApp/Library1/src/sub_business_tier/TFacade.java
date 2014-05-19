@@ -122,7 +122,7 @@ public class TFacade implements Serializable {
 		}
 	}
        
-        public synchronized TBook giveBackBook(String[] titleBookInfos, String[] bookInfos, String userName) {
+        public synchronized TLoanData giveBackBook(String[] titleBookInfos, String[] bookInfos, String userName) {
             TUser user = getUser(userName);
             if ( user == null ) {
                 System.out.println("No such user");
@@ -150,24 +150,24 @@ public class TFacade implements Serializable {
             }
             
             book.setLoan(null);
-            return book;
+            return loan;
         }
 	
-	public synchronized TLoanData loanBook(String[] titleBookInfos, String loanTimeInDays, String userName) throws Exception {
+	public synchronized TLoanData loanBook(String[] titleBookInfos, String loanTimeInDays, String userName) {
 		TBook book = Search_accessible_book(titleBookInfos, loanTimeInDays); //Book is avaiable for sure
 		if (book == null) {
-                    throw new Exception("No accessible book");
+                    return null;
 		}
                 
                 TUser user = getUser(userName);
                 if ( user == null ) {
-                    throw new Exception("No such user. users:"+Arrays.toString(mUsers.toArray()));
+                   return null;
                 }
 
                 
                 TLoanData loan = user.loanBook(book, loanTimeInDays);
                 if ( loan == null ) {
-                    throw new Exception("Cannot loan book");
+                   return null;
                 }
                 
                 book.setLoan(loan);
@@ -251,7 +251,6 @@ public class TFacade implements Serializable {
                 ap.addUser("a");
                 ap.addUser("a");
                 System.out.println(ap.getmUsers().size());
-                try {
                 ap.loanBook(d2, "2", "a");
                 ap.loanBook(d2, "2", "a");
                 ap.loanBook(d4, "2", "a");
@@ -260,10 +259,6 @@ public class TFacade implements Serializable {
                 ap.loanBook(d1, "2", "b");
                 ap.loanBook(d1, "2", "b");
                 ap.loanBook(d1, "2", "b");
-                }
-                catch(Exception e ) {
-                    e.printStackTrace();
-                }
                 ap.getUser("a").printBooks();
                 ap.getUser("b").printBooks();
              
@@ -305,5 +300,50 @@ public class TFacade implements Serializable {
     
     public synchronized List<TUser> getmUsers() {
         return mUsers;        
+    }
+    
+    public synchronized Object loanBook_r(String[] titleBookInfos, String loanTimeInDays, String userName) {
+        TLoanData loan = loanBook(titleBookInfos, loanTimeInDays, userName);
+        if(loan == null)
+            return null;
+        loan.getBook();
+        loan.getExpirationTime();
+        loan.getUser();
+        return loan.getBook().toString();
+    }
+
+    public synchronized Object giveBackBook_r(String[] titleBookInfos, String[] bookInfos, String userName) {
+       TLoanData loan = giveBackBook(titleBookInfos, bookInfos, userName);
+       if(loan == null)
+           return null;
+       loan.getBook();
+       loan.getExpirationTime();
+       loan.getUser();
+       return loan.getBook().toString();
+    }
+    
+    public synchronized List<String> getUsers_r() {
+        List<String> l = new ArrayList<String>();
+        for( TUser u : mUsers ) 
+            l.add(u.getName());
+        return l;
+    }
+    
+        
+    
+    public String[][] getUserBooks(String username) {
+        TUser u = getUser(username);
+        List<TLoanData> loans = u.getmLoans();
+        String[][] books = new String[loans.size()][];
+	int i = 0;
+	for (TLoanData next : loans) {
+		String[] book = new String[4];
+		book[0] = next.getBook().getmTitle_book().getISBN();
+		book[1] = next.getBook().getmTitle_book().getTitle();
+		book[2] = next.getBook().getmTitle_book().getActor();
+                book[3] = String.valueOf(next.getBook().getNumber());   
+		books[i++] = book;
+	}
+        return books;
     }
 }

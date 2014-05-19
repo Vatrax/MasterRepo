@@ -77,7 +77,6 @@ public class Book_form extends JPanel implements ActionListener {
 
 
     public void actionPerformed(ActionEvent event) {
-        System.out.println("1111");
         if (!table.getSelectionModel().isSelectionEmpty()) {
             String what_book_type;
             if (number.getText().equals("")) {
@@ -91,12 +90,10 @@ public class Book_form extends JPanel implements ActionListener {
             }
             String data2[] = {what_book_type, (String) number.getText(),
                 (String) period.getText()};
-            System.out.println("1");
             ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getBooks();
             if (help3 != null) {
                 list_content(help3, books);
             }
-            System.out.println("2");
         }
     }
 

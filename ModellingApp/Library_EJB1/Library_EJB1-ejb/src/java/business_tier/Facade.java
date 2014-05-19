@@ -34,48 +34,31 @@ return facade.add_book(data1, data2);
 }
 @Override
 public ArrayList<String> Search_title_book(String data[]) {
-return facade.Search_title_book(data);
-}
-@Override
-public TBook Search_accessible_book(String data1[], String data2) {
-return facade.Search_accessible_book(data1, data2);
-}
-@Override
-public void Print_books() {
-facade.Print_books();
-}
-@Override
-public void Print_title_books() {
-facade.Print_title_books();
+    return facade.Search_title_book(data);
 }
 
-@Override
-    public ArrayList<TTitle_book> getmTitle_books() {
-       return facade.getmTitle_books();
+
+    @Override
+    public Object giveBackBook(String[] titleBookInfos, String[] bookInfos, String userName) {
+       return facade.giveBackBook_r(titleBookInfos, bookInfos, userName);
     }
-@Override
-    public void setmTitle_books(ArrayList<TTitle_book> title_books) {
-       facade.setmTitle_books(title_books);
+    @Override
+    public Object loanBook(String[] titleBookInfos, String loanTimeInDays, String userName) {
+        return facade.loanBook_r(titleBookInfos, loanTimeInDays, userName);
     }
-@Override
-    public TBook giveBackBook(String[] titleBookInfos, String[] bookInfos, String userName) {
-       return facade.giveBackBook(titleBookInfos, bookInfos, userName);
-    }
-@Override
-    public TLoanData loanBook(String[] titleBookInfos, String loanTimeInDays, String userName) throws Exception {
-       return facade.loanBook(titleBookInfos, loanTimeInDays, userName);
-    }
-@Override
-    public TUser getUser(String userName) {
-       return facade.getUser(userName);
-    }
-@Override
+
+    @Override
     public TUser addUser(String userName) {
-       return facade.addUser(userName);
+        return facade.addUser(userName);
     }
-    
-@Override
-    public List<TUser> getmUsers() {
-       return facade.getmUsers();
+
+    @Override
+    public List<String> getUsers() {
+       return facade.getUsers_r();
+    }
+
+    @Override
+    public String[][] getUserBooks(String userName) {
+        return facade.getUserBooks(userName);
     }
 }

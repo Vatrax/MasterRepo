@@ -18,7 +18,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import sub_business_tier.TFacade;
 
 /**
  *
@@ -29,10 +28,10 @@ public class Client implements ActionListener {
     private static FacadeRemote facade;
 
     JPanel cards; //a panel that uses CardLayout
-    final static String NOTHING1 = "Empty1";
     final static String TITLE = "Title form";
     final static String BOOK = "Book form";
     final static String LOAN = "Loan book";
+    final static String GIVE_BACK = "Give back book";
     //TFacade facade = new TFacade();
 
     public JMenuBar createMenuBar() {
@@ -64,7 +63,7 @@ public class Client implements ActionListener {
         menuItem.addActionListener(this);
         menu.add(menuItem);
 
-        menuItem = new JMenuItem(NOTHING1);
+        menuItem = new JMenuItem(GIVE_BACK);
         menuItem.setMnemonic(KeyEvent.VK_E);
         menuItem.addActionListener(this);
         menu.add(menuItem);
@@ -74,13 +73,13 @@ public class Client implements ActionListener {
         submenu = new JMenu("A submenu");
         submenu.setMnemonic(KeyEvent.VK_S);
 
-        menuItem = new JMenuItem(NOTHING1);
+        menuItem = new JMenuItem(GIVE_BACK);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_2, ActionEvent.ALT_MASK));
         menuItem.addActionListener(this);
         submenu.add(menuItem);
 
-        menuItem = new JMenuItem(NOTHING1);
+        menuItem = new JMenuItem(GIVE_BACK);
         menuItem.addActionListener(this);
         submenu.add(menuItem);
         
@@ -113,14 +112,14 @@ public class Client implements ActionListener {
     public Container createContentPane() {
         //Create the content-pane-to-be.
 
-        Card0 card0 = new Card0();
+        Give_back_book_form card0 = new Give_back_book_form(this);
         Title_form card1 = new Title_form(this);
         Book_form card2 = new Book_form(this);
         Loan_form card3 = new Loan_form(this);
 
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(card0, NOTHING1);
+        cards.add(card0, GIVE_BACK);
         cards.add(card1, TITLE);
         cards.add(card2, BOOK);
         cards.add(card3, LOAN);
@@ -138,8 +137,8 @@ public class Client implements ActionListener {
             cl.show(cards, TITLE);
         } else if (source.getText().equals(BOOK)) {
             cl.show(cards, BOOK);
-        } else if (source.getText().equals(NOTHING1)) {
-            cl.show(cards, NOTHING1);
+        } else if (source.getText().equals(GIVE_BACK)) {
+            cl.show(cards, GIVE_BACK);
         } else if (source.getText().equals(LOAN)) {
             cl.show(cards, LOAN);
         }
