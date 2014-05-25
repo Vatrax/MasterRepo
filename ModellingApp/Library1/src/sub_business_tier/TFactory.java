@@ -19,15 +19,15 @@ public class TFactory {
     public TTitle_book create_title_book (String[] data) {
         switch(Integer.parseInt(data[0])) {
             case 0: {
-                if( data.length != 2 )
-                    return null;
+                //if( data.length != 2 )
+                //    return null;
                 TTitle_book titleBook = new TTitle_book();
                 titleBook.setISBN(data[1]);
                 return titleBook;
             }
             case 1: {
-                if( data.length != 5 )
-                    return null;
+                //if( data.length != 5 )
+                //    return null;
                 TTitle_book titleBook = new TTitle_book();
                 titleBook.setAuthor(data[1]);
                 titleBook.setTitle(data[2]);
@@ -36,16 +36,16 @@ public class TFactory {
                 return titleBook;
             }
             case 2: {
-                if( data.length != 3 )
-                    return null;
+                //if( data.length != 3 )
+                //    return null;
                 TTitle_book_on_tape titleBook = new TTitle_book_on_tape();
                 titleBook.setISBN(data[1]);
                 titleBook.setActor(data[2]);
                 return titleBook;
             }
             case 3: {
-                if( data.length != 6 )
-                    return null;
+                //if( data.length != 6 )
+                //    return null;
                 TTitle_book_on_tape titleBook = new TTitle_book_on_tape();
                 titleBook.setAuthor(data[1]);
                 titleBook.setTitle(data[2]);

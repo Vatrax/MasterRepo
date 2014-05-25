@@ -2,10 +2,14 @@ package sub_business_tier.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
 import sub_business_tier.TFactory;
 
-
+@Entity
 public class TBook_period extends TBook implements Serializable {
+        private static final long serialVersionUID = 1L;
+        @Temporal(javax.persistence.TemporalType.DATE)
 	private Date period;
 
 	@Override

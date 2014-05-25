@@ -2,16 +2,50 @@ package sub_business_tier.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import sub_business_tier.TFactory;
-
+@Entity
 public class TUser implements Serializable {
-	private ArrayList<TLoanData> mLoans = new ArrayList<TLoanData>();
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private Long id;
+    private static final long serialVersionUID = 1L;
+    
+    @OneToMany(mappedBy = "user")
+    private Collection<TLoanData> loans;
+    public Collection<TLoanData> getLoans() {return loans;}
+    public void setLoans(Collection<TLoanData> l) { this.loans =l;}
+        
+    @Transient
+    private ArrayList<TLoanData> mLoans = new ArrayList<TLoanData>();
+
+    public ArrayList<TLoanData> getmLoans() {
+        return mLoans;
+    }
+
+    public void setmLoans(ArrayList<TLoanData> mLoans) {
+        this.mLoans = mLoans;
+    }
+        
+        
         private String name;
         
 
+        public TUser() {
+            id = null;
+        }
+        
 	public void setName(String userName) {
             this.name = userName;
         }
@@ -31,9 +65,9 @@ public class TUser implements Serializable {
             TLoanData ref = factory.createLoanData(book, this, "0");
             int idx = mLoans.indexOf(ref);
             if( idx != -1 ) {
+                book.setLoan(null);
                 TLoanData loan = mLoans.remove(idx);
                 return loan;
-                
             }
             return null;
 	}
@@ -54,10 +88,6 @@ public class TUser implements Serializable {
 		TUser other = (TUser) obj;
 		return this.name.equals(other.name);
 	}
-        
-        public List<TLoanData> getmLoans() {
-            return mLoans;
-        }
 
     private boolean checkLoanPossibility() {
         return mLoans.size() < 5;
@@ -70,5 +100,13 @@ public class TUser implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

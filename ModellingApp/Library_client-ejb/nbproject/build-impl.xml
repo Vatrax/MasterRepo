@@ -233,7 +233,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
                 <property location="${build.dir}/empty" name="empty.dir"/>
                 <mkdir dir="${empty.dir}"/>
                 <mkdir dir="@{apgeneratedsrcdir}"/>
-                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" fork="${javac.fork}" includeantruntime="false" includes="@{includes}" source="${javac.source}" srcdir="@{srcdir}" target="${javac.target}">
+<!--            <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" fork="${javac.fork}" includeantruntime="false" includes="@{includes}" source="${javac.source}" srcdir="@{srcdir}" target="${javac.target}">
                     <src>
                         <dirset dir="@{gensrcdir}" erroronmissingdir="false">
                             <include name="*"/>
@@ -251,7 +251,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
                     <compilerarg path="@{apgeneratedsrcdir}"/>
                     <compilerarg line="${ap.proc.none.internal}"/>
                     <customize/>
-                </javac>
+                </javac>-->
             </sequential>
         </macrodef>
     </target>
@@ -953,16 +953,16 @@ exists or setup the property manually. For example like this:
         </macrodef>
     </target>
     <target if="j2ee.appclient.mainclass.args" name="-as-retrieve-option-workaround" unless="j2ee.clientName">
-        <property name="client.jar" value="${dist.dir}/Library_client-ejbClient.jar"/>
+        <property name="client.jar" value="${dist.dir}/Library_client-ejb.jar"/>
         <sleep seconds="3"/>
-        <copy failonerror="false" file="${wa.copy.client.jar.from}/Library_client-ejb/Library_client-ejbClient.jar" todir="${dist.dir}"/>
+        <copy failonerror="false" file="${wa.copy.client.jar.from}/Library_client-ejb/Library_client-ejb.jar" todir="${dist.dir}"/>
         <copy failonerror="false" flatten="true" todir="${dist.dir}/">
-            <fileset dir="${wa.copy.client.jar.from}/Library_client-ejb" includes="**/Library_client-ejbClient.jar"/>
+            <fileset dir="${wa.copy.client.jar.from}/Library_client-ejb" includes="**/Library_client-ejb.jar"/>
         </copy>
-        <copy flatten="true" todir="${dist.dir}/Library_client-ejbClient">
+        <copy flatten="true" todir="${dist.dir}/Library_client-ejb">
             <fileset dir="${wa.copy.client.jar.from}/Library_client-ejb" includes="**/*.*ar"/>
         </copy>
-        <copy failonerror="false" flatten="false" todir="${dist.dir}/Library_client-ejbClient">
+        <copy failonerror="false" flatten="false" todir="${dist.dir}/Library_client-ejb">
             <fileset dir="${dist.dir}/gfdeploy/Library_client-ejb" includes="**/*.jar"/>
         </copy>
     </target>

@@ -2,12 +2,32 @@ package sub_business_tier.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
-
+@Entity
 public class TBook implements Serializable {
+        private static final long serialVersionUID = 1L;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
 	private int number;
+        @ManyToOne
 	private TTitle_book mTitle_book;
-        private TLoanData loan; 
+        @OneToOne
+        private TLoanData mLoan_data; 
+
+        public TLoanData getmLoan_data() {
+            return mLoan_data;
+        }
+
+        public void setmLoan_data(TLoanData mLoan_data) {
+            this.mLoan_data = mLoan_data;
+        }
         
 	public TTitle_book getmTitle_book() {
 		return mTitle_book;
@@ -16,6 +36,10 @@ public class TBook implements Serializable {
 	public void setmTitle_book(TTitle_book mTitle_book) {
 		this.mTitle_book = mTitle_book;
 	}
+        
+        public TBook() {
+            id = null;
+        }
 
 	public int getNumber() {
 		return number;
@@ -79,11 +103,19 @@ public class TBook implements Serializable {
 	}
 
     boolean isBorrowed() {
-       return loan != null;
+       return mLoan_data != null;
     }
 
     public void setLoan(TLoanData loan) {
-        this.loan = loan;
+        this.mLoan_data = loan;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

@@ -4,14 +4,12 @@
  */
 package library_clientejb;
 
-import business_tier.FacadeRemote;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import javax.ejb.EJB;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -24,14 +22,15 @@ import javax.swing.KeyStroke;
  * @author Zofia
  */
 public class Client implements ActionListener {
-    @EJB
-    private static FacadeRemote facade;
+    //@EJB
+    //private static FacadeRemote facade;
+    
 
     JPanel cards; //a panel that uses CardLayout
     final static String TITLE = "Title form";
     final static String BOOK = "Book form";
     final static String LOAN = "Loan book";
-    final static String GIVE_BACK = "Give back book";
+    final static String GIVE_BACK = "NOTHING1";
     //TFacade facade = new TFacade();
 
     public JMenuBar createMenuBar() {
@@ -93,13 +92,7 @@ public class Client implements ActionListener {
         return menuBar;
     }
 
-    public static FacadeRemote getFacade() {
-        return facade;
-    }
-
-    public static void setFacade(FacadeRemote facade) {
-        Client.facade = facade;
-    }
+  
 
  /*   public FacadeRemote getFacade() {
         return facade;
@@ -119,10 +112,10 @@ public class Client implements ActionListener {
 
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(card0, GIVE_BACK);
         cards.add(card1, TITLE);
         cards.add(card2, BOOK);
         cards.add(card3, LOAN);
+        cards.add(card0, GIVE_BACK);
 
         JPanel p1 = new JPanel();
 

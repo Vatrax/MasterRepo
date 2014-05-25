@@ -8,19 +8,35 @@ package sub_business_tier.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 
 /**
  *
  * @author ciesiolk
  */
-
+@Entity
 public class TLoanData implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
     private TUser user;
+    @OneToOne
     private TBook book;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date expirationTime;
 
+    public TLoanData() {
+        id = null;
+    }
     
     @Override
     public String toString() {

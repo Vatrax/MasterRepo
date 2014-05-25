@@ -19,6 +19,7 @@ import java.util.List;
 import sub_business_tier.entities.TLoanData;
 
 public class TFacade implements Serializable {
+      
 	private static final long serialVersionUID = 1L;
 	private ArrayList<TTitle_book> mTitle_books = new ArrayList<TTitle_book>();
         private ArrayList<TUser> mUsers = new ArrayList<TUser>();
@@ -26,7 +27,8 @@ public class TFacade implements Serializable {
 	
 
 	public ArrayList<TTitle_book> getmTitle_books() {
-		return mTitle_books;
+            //System.setOut(null);
+            return mTitle_books;
 	}
 
 	public void setmTitle_books(ArrayList<TTitle_book> title_books) {
@@ -83,7 +85,7 @@ public class TFacade implements Serializable {
 		TTitle_book title_book = factory.create_title_book(data);
 		TTitle_book title_book_ = search_title_book(title_book);
 		if (title_book_ != null) {
-			return title_book_.getBooks();
+			return title_book_.getTBooks();
 		}
 		return null;
 	}
@@ -103,7 +105,7 @@ public class TFacade implements Serializable {
 	public synchronized void Print_books() {
 		System.out.print("\nBooks");
 		for (int i = 0; i < mTitle_books.size(); i++) {
-			ArrayList<String> help_list = mTitle_books.get(i).getBooks();
+			ArrayList<String> help_list = mTitle_books.get(i).getTBooks();
 			for (int j = 0; j < help_list.size(); j++) {
 				System.out.print(help_list.get(j).toString());
 			}
@@ -122,34 +124,33 @@ public class TFacade implements Serializable {
 		}
 	}
        
-        public synchronized TLoanData giveBackBook(String[] titleBookInfos, String[] bookInfos, String userName) {
-            TUser user = getUser(userName);
-            if ( user == null ) {
-                System.out.println("No such user");
-                return null;
-            }    
+        public TTitle_book istitles(String[] titleBookInfos)
+        {
             
             TTitle_book title_book = factory.create_title_book(titleBookInfos);
             title_book = search_title_book(title_book);
-            if ( title_book == null ) {
-                System.out.println("No such title");
-                return null;
-            }
-
-            TBook book = factory.create_book(bookInfos);
-            book = title_book.search_book(book);
-            if( book == null ) {
-                System.out.println("No such book");
-                return null;   
-            }
-
-            TLoanData loan = user.giveBackBook(book);
-            if( loan == null ) {
-                System.out.println("Error while giving back book");
-                return null;
-            }
+            if ( title_book == null ) 
+                System.err.println("No such title");
             
-            book.setLoan(null);
+            return title_book;
+        }
+        
+        public synchronized TLoanData giveBackBook(String[] titleBookInfos, String[] bookInfos, String userName) {
+            TUser user = getUser(userName);
+            if ( user == null )
+                return null; 
+            TTitle_book title_book;
+            if ( (title_book = this.istitles(titleBookInfos)) == null )
+                return null;
+
+            TBook book = title_book.getBook(bookInfos);
+            if( book == null )
+                return null;
+            
+            TLoanData loan = user.giveBackBook(book);
+            if( loan == null )
+                return null;
+            
             return loan;
         }
 	
@@ -281,6 +282,7 @@ public class TFacade implements Serializable {
             user = this.mUsers.get(idx);
             return user;
         }
+        System.out.println("No such user");
         return null;
     }
     

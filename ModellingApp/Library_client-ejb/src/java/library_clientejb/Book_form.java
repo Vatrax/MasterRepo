@@ -46,7 +46,6 @@ public class Book_form extends JPanel implements ActionListener {
         table.getSelectionModel().addListSelectionListener(new RowListener());
 
         add(new JScrollPane(table));
-
         JLabel lnumber = new JLabel("Number of a book");
         add(lnumber);
         number = new JTextField();
@@ -90,7 +89,7 @@ public class Book_form extends JPanel implements ActionListener {
             }
             String data2[] = {what_book_type, (String) number.getText(),
                 (String) period.getText()};
-            ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getBooks();
+            ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getTBooks();
             if (help3 != null) {
                 list_content(help3, books);
             }

@@ -13,14 +13,14 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class Show_book_titles_table extends JPanel {
+public class Show_book_titles_form extends JPanel {
 
     protected JTable table;
     protected int row;
     protected Client client;
     protected Show_books_table_model model;
 
-    public Show_book_titles_table(Client client) {
+    public Show_book_titles_form(Client client) {
         super();
         this.client = client;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

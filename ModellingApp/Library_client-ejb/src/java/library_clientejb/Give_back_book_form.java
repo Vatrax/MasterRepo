@@ -18,6 +18,7 @@ public class Give_back_book_form extends JPanel{
     public Give_back_book_form(Client client_) {
         this.client = client_;
         usersCBx = new JComboBox();
+        usersCBx.setSize(200, 30);
         add(usersCBx);
     }
     

@@ -2,18 +2,44 @@ package sub_business_tier.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import sub_business_tier.TFactory;
 
+@Entity
 public class TTitle_book implements Serializable {
+        private static final long serialVersionUID = 1L;
+        @Id
+        @GeneratedValue (strategy = GenerationType.AUTO)
+	private Long id;
 	private String publisher;
 	private String ISBN;
 	private String title;
 	private String author;
-	private ArrayList<TBook> mBooks = new ArrayList<TBook>();
+        @OneToMany(mappedBy = "mTitle_book")
+        private Collection<TBook> books;
+        public Collection<TBook> getBooks() {return books;}
+        public void setBooks(Collection<TBook> b) { this.books = b;}
 
-
-	private Long id;
+        public TTitle_book() {
+            id = null;
+        }
+        
+        @Transient 
+        private ArrayList<TBook> mBooks = new ArrayList<TBook>();
+        public ArrayList<TBook> getmBooks() {
+		return mBooks;
+	}
+        public void setmBooks(ArrayList<TBook> mBooks) {
+		this.mBooks = mBooks;
+	}
 
 	public String getISBN() {
 		return ISBN;
@@ -31,11 +57,9 @@ public class TTitle_book implements Serializable {
 		this.author = author;
 	}
 
-	public ArrayList<TBook> getmBooks() {
-		return mBooks;
-	}
 
-	public ArrayList<String> getBooks() {
+
+	public ArrayList<String> getTBooks() {
 		ArrayList<String> books = new ArrayList<String>();
 		Iterator<TBook> iter = mBooks.iterator();
 		while (iter.hasNext()) {
@@ -45,9 +69,7 @@ public class TTitle_book implements Serializable {
 		return books;
 	}
 
-	public void setmBooks(ArrayList<TBook> mBooks) {
-		this.mBooks = mBooks;
-	}
+
 
 	public String getPublisher() {
 		return publisher;
@@ -98,7 +120,7 @@ public class TTitle_book implements Serializable {
 	}
 
 	public TBook search_book(TBook book) {
-                book.setmTitle_book(this); //?!?!? NIE WIEM CZY NIE PSUJE, ALE CHYBA TAK TRZERBA
+                book.setmTitle_book(this);
 		int idx = mBooks.indexOf(book);
 		if (idx != -1) {
 		    return mBooks.get(idx);
@@ -124,4 +146,14 @@ public class TTitle_book implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+    public TBook getBook(String[] bookInfos) {
+            TFactory factory = new TFactory();
+            TBook book = factory.create_book(bookInfos);
+            book = this.search_book(book);
+            if( book == null ) 
+                System.out.println("No such book");
+            return book;   
+            
+    }
 }

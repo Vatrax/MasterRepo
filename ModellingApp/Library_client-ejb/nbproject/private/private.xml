@@ -4,6 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Book_form.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Give_back_book_form.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Client.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Show_borrowed_books_table_model.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Show_book_titles_form.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Show_books_table_model.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Title_form.java</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/nbproject/build-impl.xml</file>
+            <file>file:/home/ciesiolk/Desktop/pwr/ModellingApp/Library_client-ejb/src/java/library_clientejb/Loan_form.java</file>
         </group>
     </open-files>
 </project-private>
