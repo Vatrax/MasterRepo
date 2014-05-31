@@ -117,8 +117,8 @@ public class Client implements ActionListener {
 
         Give_back_book_form card0 = new Give_back_book_form(this);
         Title_form card1 = new Title_form(this);
-        Book_form card2 = new Book_form(this);
-        Loan_form card3 = new Loan_form(this);
+        Book_form card2 = new Book_form();
+        Loan_form card3 = new Loan_form();
 
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());

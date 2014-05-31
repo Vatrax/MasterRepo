@@ -29,13 +29,11 @@ public class Book_form extends JPanel implements ActionListener {
     private JTextField period;
     private JButton add_book;
     int row;
-    Client client;
     Show_books_table_model model;
     JComboBox books;
 
-    public Book_form(Client client) {
+    public Book_form() {
         super();
-        this.client = client;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         model = new Show_books_table_model();
         table_content();
@@ -73,7 +71,7 @@ public class Book_form extends JPanel implements ActionListener {
         }
     }
 
-
+    @Override
     public void actionPerformed(ActionEvent event) {
         if (!table.getSelectionModel().isSelectionEmpty()) {
             String what_book_type;
@@ -88,14 +86,13 @@ public class Book_form extends JPanel implements ActionListener {
             }
             String data2[] = {what_book_type, (String) number.getText(),
                 (String) period.getText()};
-            ArrayList<String> help3 = client.getFacade().add_book(title(), data2).getTBooks();
+            ArrayList<String> help3 = Client.getFacade().add_book(title(), data2).getTBooks();
             if (help3 != null) {
                 list_content(help3, books);
             }
         }
     }
 
-    
     private String[] title() {
         String what, actor;
         actor = (String) model.getValueAt(row, 4);
@@ -108,25 +105,28 @@ public class Book_form extends JPanel implements ActionListener {
         String data[] = {what, (String) model.getValueAt(row, 1), actor};
         return data;
     }
-    
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         table_content();
     }
-    
+
     private void table_content() {
-        Object[][] titles = client.getFacade().gettitle_books();
+        Object[][] titles = Client.getFacade().gettitle_books();
         model.setData(titles);
     }
-    
+
     private void print_books() {
-        ArrayList<String> help3 = client.getFacade().Search_title_book(title());
+        ArrayList<String> help3 = Client.getFacade().Search_title_book(title());
         if (help3 != null) {
             list_content(help3, books);
         }
     }
 
     private class RowListener implements ListSelectionListener {
+
+        @Override
         public void valueChanged(ListSelectionEvent event) {
             if (event.getValueIsAdjusting()) {
                 return;
@@ -136,5 +136,4 @@ public class Book_form extends JPanel implements ActionListener {
         }
     }
 
-   
 }

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 public class Title_form extends JPanel implements ActionListener {
 
     Client client;
@@ -47,6 +48,7 @@ public class Title_form extends JPanel implements ActionListener {
 
     }
 
+    @Override
     public void actionPerformed(ActionEvent evt) {
         String[] data = form_title();
         if (data == null) {

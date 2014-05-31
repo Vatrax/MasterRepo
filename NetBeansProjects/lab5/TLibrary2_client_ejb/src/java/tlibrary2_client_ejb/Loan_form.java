@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 public class Loan_form extends Show_book_titles_form implements ActionListener {
 
     //Client client;
-    JComboBox usersCBx;
+        JComboBox usersCBx;
     JTextField addUserTF;
     JButton addUserBtn;
     JTextField periodTF;
@@ -34,8 +34,8 @@ public class Loan_form extends Show_book_titles_form implements ActionListener {
     Show_borrowed_books_table_model borrowedModel;
     JButton giveBackBook;
 
-    public Loan_form(Client client_) {
-        super(client_);
+    public Loan_form() {
+        super();
         usersCBx = new JComboBox();
         usersCBx.addActionListener(this);
         add(usersCBx);        
@@ -75,7 +75,7 @@ public class Loan_form extends Show_book_titles_form implements ActionListener {
  
     private void fillUsers() {
         usersCBx.removeAllItems();
-        List<String> items = client.getFacade().getUsers();
+        List<String> items = Client.getFacade().getUsers();
         for( String o : items)
             usersCBx.addItem(o);
     }   
@@ -87,12 +87,12 @@ public class Loan_form extends Show_book_titles_form implements ActionListener {
         if( source == null)
             return;
         if( source == addUserBtn ) {
-            client.getFacade().addUser( addUserTF.getText().toString() );
+            Client.getFacade().addUser( addUserTF.getText().toString() );
             fillUsers();
         }
         else if( source == loanBookBtn ) {
             try {
-                Object loan = client.getFacade().loanBook(title(), period(),user());
+                Object loan = Client.getFacade().loanBook(title(), period(),user());
                 setBorrowedBooks();
             if( loan != null)
                 System.out.println(loan.toString());
@@ -116,7 +116,7 @@ public class Loan_form extends Show_book_titles_form implements ActionListener {
                 String titleBookInfos[] = {what, (String) borrowedModel.getValueAt(selectedRow, 0), actor};
                 String bookInfos[] = {"0", (String) borrowedModel.getValueAt(selectedRow, 3)};
 
-                System.out.println(client.getFacade().giveBackBook(titleBookInfos, bookInfos, user() ));
+                System.out.println(Client.getFacade().giveBackBook(titleBookInfos, bookInfos, user() ));
                 setBorrowedBooks();
             }
         }
@@ -147,7 +147,7 @@ public class Loan_form extends Show_book_titles_form implements ActionListener {
             System.out.println("user == null!");
             return;
         }
-        Object[][] o = client.getFacade().getUserBooks( u );
+        Object[][] o = Client.getFacade().getUserBooks( u );
         if( o == null || borrowedModel == null )
             return;
         borrowedModel.setData( o );      

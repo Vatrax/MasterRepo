@@ -17,12 +17,10 @@ public class Show_book_titles_form extends JPanel {
 
     protected JTable table;
     protected int row;
-    protected Client client;
     protected Show_books_table_model model;
 
-    public Show_book_titles_form(Client client) {
+    public Show_book_titles_form() {
         super();
-        this.client = client;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         model = new Show_books_table_model();
         table_content();
@@ -55,7 +53,7 @@ public class Show_book_titles_form extends JPanel {
     }
     
     protected void table_content() {
-        Object[][] titles = client.getFacade().gettitle_books();
+        Object[][] titles = Client.getFacade().gettitle_books();
         model.setData(titles);
     }
     
