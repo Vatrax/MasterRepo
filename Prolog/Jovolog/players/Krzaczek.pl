@@ -59,7 +59,6 @@ act(Action, Knowledge) :- turn_if_wall(Action, Knowledge). %if against the wall
 act(Action, Knowledge) :- else_move_on(Action, Knowledge). %otherwise
 
 avoidLooping(Action, Knowledge) :-
-			%this will fail on a wall
 	haveGold(NGolds),
 	myWorldSize(Max_X,Max_Y),
 	myPosition(X, Y, Orient),
@@ -141,7 +140,6 @@ tryToKill(Action, Knowledge) :-
     myPosition(X, Y, Orient),
 	myTrail(Trail),
 	numberOfMoves(NumberOfMoves),
-	NewWumpusNumber is WumpusNumber - 1, %ZLE --------------------------------------------------------
 	NewNumberOfMoves is NumberOfMoves + 1,
 	Action = shoot,
 	Knowledge = [gameStarted,
@@ -149,10 +147,34 @@ tryToKill(Action, Knowledge) :-
 		     myWorldSize(Max_X, Max_Y),
 		     myPosition(X, Y, Orient),
 		     myTrail(Trail),
-			 wumpus(NewWumpusNumber),
+			 wumpus(WumpusNumber),
 			 arrows(NewArrowsNumber),
 		     numberOfMoves(NewNumberOfMoves)].
 
+tryToKill(Action, Knowledge) :-
+	wumpus(WumpusNumber),
+	scream,
+	not(danger),
+	haveGold(NGolds),
+	wumpus(WumpusNumber),
+	arrows(ArrowsNumber),
+	myWorldSize(Max_X, Max_Y),
+    myPosition(X, Y, Orient),
+	forwardStep(X, Y, Orient, New_X, New_Y),
+	myTrail(Trail),
+	numberOfMoves(NumberOfMoves),
+	NewWumpusNumber is WumpusNumber - 1,
+	NewNumberOfMoves is NumberOfMoves + 1,
+	Action = moveForward,
+	NewTrail = [ [Action,X,Y,Orient] | Trail ],
+	Knowledge = [gameStarted,
+	             haveGold(NGolds),
+		     myWorldSize(Max_X, Max_Y),
+		     myPosition(New_X, New_Y, Orient),
+		     myTrail(NewTrail),
+			 wumpus(NewWumpusNumber),
+			 arrows(NewArrowsNumber),
+		     numberOfMoves(NewNumberOfMoves)].
 
 goBackIfDanger(Action, Knowledge) :- %STEP 1
 	wumpus(WumpusNumber),
