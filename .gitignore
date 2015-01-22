@@ -1,2 +1,5 @@
 /NetBeansProjects/lab5/TLibrary2/build/
 /NetBeansProjects/lab5/TLibrary2_EE/TLibrary2_EE-war/dist/
+.idea/
+*.iml
+target/
