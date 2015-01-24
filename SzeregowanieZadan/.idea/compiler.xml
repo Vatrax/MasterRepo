@@ -22,11 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="SzeregowanieZadan" />
+        <module name="TaskGrouper" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SzeregowanieZadan" target="1.6" />
+      <module name="TaskGrouper" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

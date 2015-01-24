@@ -5,26 +5,31 @@ import com.pwr.project.management.listeners.RemoveTeamClickListener;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.model.Type;
 import com.vaadin.data.util.BeanContainer;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 
 /**
  * Created by krzaczek on 22.01.15.
  */
-public class TeamManagementLayout extends FormLayout {
+public class TeamManagementLayout extends HorizontalLayout {
 
 	private BeanContainer<String, Team> dataSource;
 
 	public TeamManagementLayout(BeanContainer<String, Team> dataSource) {
 		this.dataSource = dataSource;
-		setMargin(true);
-		addComponent(createChooseLayout());
-		addComponent(createCreateLayout());
+		setSizeFull();
+		Layout removeLayout = createRemoveLayout();
+		Layout createLayout = createCreateLayout();
+		addComponent(createLayout);
+		addComponent(removeLayout);
+		setExpandRatio(createLayout, 0.5F);
+		setExpandRatio(removeLayout, 0.5F);
 	}
 
-	private Component createCreateLayout() {
-		VerticalLayout createLayout = new VerticalLayout();
-		createLayout.setMargin(new MarginInfo(true, false, false, false));
+	private Layout createCreateLayout() {
+		FormLayout createLayout = new FormLayout();
+		createLayout.setSizeFull();
+		createLayout.setMargin(true);
+		createLayout.setSizeFull();
 		TextField teamName = new TextField("Name:");
 		createLayout.addComponent(teamName);
 		ComboBox typeSelector = new ComboBox("Type:");
@@ -34,7 +39,7 @@ public class TeamManagementLayout extends FormLayout {
 		for (Type type : Type.values()) {
 			typeSelector.addItem(type);
 		}
-		Button create = new Button("Create");
+		Button create = new Button("Create Team");
 		createLayout.addComponent(typeSelector);
 		createLayout.addComponent(create);
 		createLayout.setComponentAlignment(create, Alignment.MIDDLE_CENTER);
@@ -42,8 +47,10 @@ public class TeamManagementLayout extends FormLayout {
 		return createLayout;
 	}
 
-	private Layout createChooseLayout() {
-		VerticalLayout chooseLayout = new VerticalLayout();
+	private Layout createRemoveLayout() {
+		FormLayout chooseLayout = new FormLayout();
+		chooseLayout.setSizeFull();
+		chooseLayout.setMargin(true);
 		ComboBox teams = createComboBox();
 		chooseLayout.addComponent(teams);
 		Button remove = new Button("Remove");

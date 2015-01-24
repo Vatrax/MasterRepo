@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TaskGrouper:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="TaskGrouper-1.0.war">
+      <element id="artifact" artifact-name="TaskGrouper:war exploded" />
+    </root>
+  </artifact>
+</component>

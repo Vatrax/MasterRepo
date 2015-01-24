@@ -4,7 +4,7 @@ package com.pwr.project.management.model;
  * Created by krzaczek on 22.01.15.
  */
 public enum Type {
-	BRICKLAYER(1), ELECTRICIAN(2), PLUMBER(3), RENOVATIONER(4);
+	BRICKLAYER(1), ELECTRICIAN(2), PLUMBER(3), RENOVATOR(4);
 
 	private int priority;
 

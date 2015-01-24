@@ -7,11 +7,12 @@ import com.pwr.project.management.ui.partial.TeamManagementLayout;
 import com.pwr.project.management.ui.partial.TeamView;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * Created by krzaczek on 22.01.15.
  */
-public class MainLayout extends HorizontalLayout {
+public class MainLayout extends VerticalLayout {
 
 	private BeanContainer<String, Team> teams;
 	private BeanContainer<String, Project> projects;
@@ -30,12 +31,12 @@ public class MainLayout extends HorizontalLayout {
 		ProjectManagementLayout projectManagementLayout = new ProjectManagementLayout(projects);
 		TeamView teamView = new TeamView();
 
-		addComponent(teamCreationLayout);
-		addComponent(projectManagementLayout);
 		addComponent(teamView);
+		HorizontalLayout managementLayout = new HorizontalLayout();
+		managementLayout.addComponent(teamCreationLayout);
+		managementLayout.addComponent(projectManagementLayout);
 
-		setExpandRatio(teamCreationLayout, 0.25F);
-		setExpandRatio(projectManagementLayout, 0.25F);
-		setExpandRatio(teamView, 0.5F);
+		addComponent(managementLayout);
+
 	}
 }
