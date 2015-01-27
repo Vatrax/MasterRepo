@@ -1,0 +1,10 @@
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/user/UserTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/place/PlaceCreationTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/util/Coordinates.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/event/EventTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/comment/CommentCreationTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/rating/RateCreationTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/event/EventCreationTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/picture/PictureTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/rating/RateTO.java
+/home/krzaczek/PWr/interactive_map/Interactive Map Interface/src/main/java/pl/edu/wroc/pwr/model/to/place/PlaceTO.java

@@ -1,0 +1,10 @@
+pl/edu/wroc/pwr/model/to/rating/RateTO.class
+pl/edu/wroc/pwr/model/to/user/UserTO.class
+pl/edu/wroc/pwr/model/util/Coordinates.class
+pl/edu/wroc/pwr/model/to/picture/PictureTO.class
+pl/edu/wroc/pwr/model/to/event/EventTO.class
+pl/edu/wroc/pwr/model/to/place/PlaceTO.class
+pl/edu/wroc/pwr/model/to/place/PlaceCreationTO.class
+pl/edu/wroc/pwr/model/to/rating/RateCreationTO.class
+pl/edu/wroc/pwr/model/to/comment/CommentCreationTO.class
+pl/edu/wroc/pwr/model/to/event/EventCreationTO.class
