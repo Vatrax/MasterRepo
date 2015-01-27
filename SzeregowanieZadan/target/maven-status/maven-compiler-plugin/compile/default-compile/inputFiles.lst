@@ -1,7 +1,8 @@
-/home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/model/Team.java
 /home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/algorythm/ProjectManager.java
+/home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/model/Team.java
 /home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/listeners/RemoveTeamClickListener.java
 /home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/listeners/RemoveProjectClickListener.java
+/home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/model/AssignedTask.java
 /home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/ui/MainLayout.java
 /home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/model/Task.java
 /home/krzaczek/PWr/PWrRepo/SzeregowanieZadan/src/main/java/com/pwr/project/management/ui/ProjectsManager.java

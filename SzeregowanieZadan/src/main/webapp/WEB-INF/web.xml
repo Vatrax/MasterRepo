@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>MyApplication</display-name>
+
     <context-param>
         <description>Vaadin production mode</description>
         <param-name>productionMode</param-name>
@@ -15,6 +16,10 @@
             <description>Vaadin UI</description>
             <param-name>UI</param-name>
             <param-value>com.pwr.project.management.ui.ProjectsManager</param-value>
+        </init-param>
+        <init-param>
+            <param-name>widgetset</param-name>
+            <param-value>com.pwr.project.management.ui.MyAppWidgetSet</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

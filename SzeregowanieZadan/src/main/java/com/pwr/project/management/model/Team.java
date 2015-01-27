@@ -1,7 +1,8 @@
 package com.pwr.project.management.model;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by krzaczek on 22.01.15.
@@ -10,8 +11,8 @@ public class Team implements Serializable{
 
 	private String name;
 	private Type type;
-	private Map<Task, Integer> tasks;
-	private int end = 0;
+	private List<AssignedTask> tasks = new ArrayList<AssignedTask>();
+	private long end = 0;
 
 	public Team(String name, Type type) {
 		this.name = name;
@@ -26,11 +27,11 @@ public class Team implements Serializable{
 		this.type = type;
 	}
 
-	public Map<Task, Integer> getTasks() {
+	public List<AssignedTask> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(Map<Task, Integer> tasks) {
+	public void setTasks(List<AssignedTask> tasks) {
 		this.tasks = tasks;
 	}
 
@@ -42,11 +43,11 @@ public class Team implements Serializable{
 		this.name = name;
 	}
 
-	public int getEnd() {
+	public long getEnd() {
 		return end;
 	}
 
-	public void setEnd(int end) {
+	public void setEnd(long end) {
 		this.end = end;
 	}
 

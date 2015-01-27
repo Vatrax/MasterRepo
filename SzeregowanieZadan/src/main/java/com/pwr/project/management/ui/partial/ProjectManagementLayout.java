@@ -4,7 +4,6 @@ import com.pwr.project.management.listeners.RemoveProjectClickListener;
 import com.pwr.project.management.model.Project;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.*;
-import org.vaadin.risto.stepper.IntStepper;
 
 /**
  * Created by krzaczek on 22.01.15.

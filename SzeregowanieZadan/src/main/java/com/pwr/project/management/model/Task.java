@@ -32,6 +32,6 @@ public class Task implements Serializable, Comparable {
 	}
 
 	@Override public int compareTo(Object o) {
-		return this.getType().getPriority() - ((Team) o).getType().getPriority();
+		return this.getType().getPriority() - ((Task) o).getType().getPriority();
 	}
 }
