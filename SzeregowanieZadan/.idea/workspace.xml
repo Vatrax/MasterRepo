@@ -7,6 +7,7 @@
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$USER_HOME$/Desktop/gantt/gantt-demo/target/" />
+    <ignored mask="/target" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,14 +50,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectManagementLayout.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProjectManagementLayout.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pwr/project/management/ui/partial/ProjectManagementLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6244898" vertical-offset="378" max-vertical-offset="1494">
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1494">
               <caret line="38" column="46" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateProjectListener.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pwr/project/management/listeners/CreateProjectListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9642147" vertical-offset="559" max-vertical-offset="1170">
+              <caret line="68" column="1" selection-start-line="68" selection-start-column="1" selection-end-line="68" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -511,7 +522,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Ignored.Files" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -808,12 +819,12 @@
       <workItem from="1422364643242" duration="15546000" />
       <workItem from="1422387089800" duration="10589000" />
       <workItem from="1422429913802" duration="1567000" />
-      <workItem from="1422431508108" duration="18247000" />
+      <workItem from="1422431508108" duration="18779000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45966000" />
+    <option name="totallyTimeSpent" value="46498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-14" width="1555" height="924" extended-state="6" />
@@ -1243,14 +1254,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwr/project/management/listeners/CreateProjectListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="613" max-vertical-offset="1170">
-          <caret line="64" column="39" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwr/project/management/presenter/GanttPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="738">
@@ -1321,11 +1324,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwr/project/management/ui/partial/ProjectManagementLayout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6244898" vertical-offset="378" max-vertical-offset="1494">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1494">
           <caret line="38" column="46" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwr/project/management/listeners/CreateProjectListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9642147" vertical-offset="559" max-vertical-offset="1170">
+          <caret line="68" column="1" selection-start-line="68" selection-start-column="1" selection-end-line="68" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
