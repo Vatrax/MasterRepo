@@ -1,5 +1,6 @@
 package com.pwr.project.management.listeners;
 
+import com.pwr.project.management.presenter.GanttPresenter;
 import com.vaadin.data.Container;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
@@ -10,13 +11,19 @@ import com.vaadin.ui.ComboBox;
 public class RemoveProjectClickListener implements Button.ClickListener {
 	private final Container dataSource;
 	private final ComboBox projects;
+	private GanttPresenter ganttPresenter;
 
-	public RemoveProjectClickListener(Container dataSource, ComboBox projects) {
+	public RemoveProjectClickListener(Container dataSource, ComboBox projects, GanttPresenter ganttPresenter) {
 		this.dataSource = dataSource;
 		this.projects = projects;
+		this.ganttPresenter = ganttPresenter;
 	}
 
 	@Override public void buttonClick(Button.ClickEvent clickEvent) {
-		dataSource.removeItem(projects.getValue());
+		if (projects.getValue() != null) {
+			dataSource.removeItem(projects.getValue());
+			ganttPresenter.updateGantt();
+		}
+		projects.setValue(null);
 	}
 }

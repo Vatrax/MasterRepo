@@ -2,17 +2,18 @@ package com.pwr.project.management.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by krzaczek on 22.01.15.
  */
-public class Team implements Serializable{
+public class Team implements Serializable, Comparable {
 
 	private String name;
 	private Type type;
 	private List<AssignedTask> tasks = new ArrayList<AssignedTask>();
-	private long end = 0;
+	private Date end = new Date();
 
 	public Team(String name, Type type) {
 		this.name = name;
@@ -43,12 +44,15 @@ public class Team implements Serializable{
 		this.name = name;
 	}
 
-	public long getEnd() {
+	public Date getEnd() {
 		return end;
 	}
 
-	public void setEnd(long end) {
+	public void setEnd(Date end) {
 		this.end = end;
 	}
 
+	@Override public int compareTo(Object o) {
+		return ((Team) o).getType().getPriority() - this.getType().getPriority();
+	}
 }

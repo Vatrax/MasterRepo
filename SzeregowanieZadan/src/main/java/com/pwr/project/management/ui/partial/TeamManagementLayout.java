@@ -4,6 +4,7 @@ import com.pwr.project.management.listeners.CreateTeamListener;
 import com.pwr.project.management.listeners.RemoveTeamClickListener;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.model.Type;
+import com.pwr.project.management.presenter.GanttPresenter;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.*;
 
@@ -14,21 +15,21 @@ public class TeamManagementLayout extends HorizontalLayout {
 
 	private BeanContainer<String, Team> dataSource;
 
-	public TeamManagementLayout(BeanContainer<String, Team> dataSource) {
+	public TeamManagementLayout(BeanContainer<String, Team> dataSource, GanttPresenter ganttPresenter) {
 		this.dataSource = dataSource;
 		setSizeFull();
-		Layout removeLayout = createRemoveLayout();
-		Layout createLayout = createCreateLayout();
+		setMargin(true);
+		Layout removeLayout = createRemoveLayout(ganttPresenter);
+		Layout createLayout = createCreateLayout(ganttPresenter);
 		addComponent(createLayout);
 		addComponent(removeLayout);
 		setExpandRatio(createLayout, 0.5F);
 		setExpandRatio(removeLayout, 0.5F);
 	}
 
-	private Layout createCreateLayout() {
+	private Layout createCreateLayout(GanttPresenter ganttPresenter) {
 		FormLayout createLayout = new FormLayout();
 		createLayout.setSizeFull();
-		createLayout.setMargin(true);
 		createLayout.setSizeFull();
 		TextField teamName = new TextField("Name:");
 		createLayout.addComponent(teamName);
@@ -43,18 +44,17 @@ public class TeamManagementLayout extends HorizontalLayout {
 		createLayout.addComponent(typeSelector);
 		createLayout.addComponent(create);
 		createLayout.setComponentAlignment(create, Alignment.MIDDLE_CENTER);
-		create.addClickListener(new CreateTeamListener(dataSource, typeSelector, teamName));
+		create.addClickListener(new CreateTeamListener(dataSource, typeSelector, teamName, ganttPresenter));
 		return createLayout;
 	}
 
-	private Layout createRemoveLayout() {
+	private Layout createRemoveLayout(GanttPresenter ganttPresenter) {
 		FormLayout chooseLayout = new FormLayout();
 		chooseLayout.setSizeFull();
-		chooseLayout.setMargin(true);
 		ComboBox teams = createComboBox();
 		chooseLayout.addComponent(teams);
 		Button remove = new Button("Remove");
-		remove.addClickListener(new RemoveTeamClickListener(dataSource, teams));
+		remove.addClickListener(new RemoveTeamClickListener(dataSource, teams, ganttPresenter));
 		chooseLayout.addComponent(remove);
 		chooseLayout.setComponentAlignment(remove, Alignment.MIDDLE_CENTER);
 		return chooseLayout;
