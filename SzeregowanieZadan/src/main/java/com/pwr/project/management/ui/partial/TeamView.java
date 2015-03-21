@@ -2,7 +2,6 @@ package com.pwr.project.management.ui.partial;
 
 import com.pwr.project.management.model.AssignedTask;
 import com.pwr.project.management.model.Team;
-import com.vaadin.data.util.BeanContainer;
 import org.tltv.gantt.Gantt;
 import org.tltv.gantt.client.shared.Step;
 
@@ -34,12 +33,8 @@ public class TeamView extends Gantt {
 
 	}
 
-	public void drawSteps(BeanContainer<String, Team> teamContainer) {
+	public void drawSteps(List<Team> teams) {
 		removeSteps();
-		List<Team> teams = new ArrayList<>();
-		for (String id : teamContainer.getItemIds()) {
-			teams.add(teamContainer.getItem(id).getBean());
-		}
 		Collections.sort(teams);
 		Collections.reverse(teams);
 		for (Team team : teams) {

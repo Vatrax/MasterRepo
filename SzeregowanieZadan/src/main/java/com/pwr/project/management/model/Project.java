@@ -30,4 +30,21 @@ public class Project {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Project)) {
+			return false;
+		}
+		if (obj == this) {
+			return  true;
+		}
+		if (((Project) obj).getName().equals(name)) {
+			return true;
+		}
+		else return false;
+	}
 }

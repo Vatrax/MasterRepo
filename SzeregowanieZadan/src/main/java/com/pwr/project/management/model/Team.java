@@ -52,7 +52,25 @@ public class Team implements Serializable, Comparable {
 		this.end = end;
 	}
 
-	@Override public int compareTo(Object o) {
+	@Override
+	public int compareTo(Object o) {
 		return ((Team) o).getType().getPriority() - this.getType().getPriority();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Team)) {
+			return false;
+		}
+		if (obj == this) {
+			return  true;
+		}
+		if (((Team) obj).getName().equals(name)) {
+			return true;
+		}
+		else return false;
 	}
 }

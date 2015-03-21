@@ -3,35 +3,38 @@ package com.pwr.project.management.listeners;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.model.Type;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.vaadin.data.util.BeanContainer;
+import com.pwr.project.management.ui.TeamManagementPresenter;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.TextField;
+
+import java.util.List;
 
 /**
  * Created by krzaczek on 22.01.15.
  */
 public class CreateTeamListener implements Button.ClickListener {
 
-	private final BeanContainer<String, Team> dataSource;
-	private final ComboBox typeSelector;
-	private final TextField teamName;
-	private GanttPresenter ganttPresenter;
+	private final List<Team> teams;
 
-	public CreateTeamListener(BeanContainer<String, Team> dataSource, ComboBox typeSelector, TextField teamName,
-			GanttPresenter ganttPresenter) {
-		this.dataSource = dataSource;
-		this.typeSelector = typeSelector;
-		this.teamName = teamName;
+	private GanttPresenter ganttPresenter;
+	private final TeamManagementPresenter teamManagementPresenter;
+
+	public CreateTeamListener(List<Team> teams, GanttPresenter ganttPresenter,
+			TeamManagementPresenter teamManagementPresenter) {
+		this.teams = teams;
 		this.ganttPresenter = ganttPresenter;
+		this.teamManagementPresenter = teamManagementPresenter;
 	}
 
 	@Override public void buttonClick(Button.ClickEvent clickEvent) {
-		if (teamName.getValue() != null && !teamName.getValue().isEmpty() && typeSelector.getValue() != null) {
-			Team team = new Team(teamName.getValue(), (Type) typeSelector.getValue());
-			teamName.setValue("");
-			dataSource.addBean(team);
+		String teamName = teamManagementPresenter.getTeamName();
+		Type type = teamManagementPresenter.getType();
+		if (teamName != null && !teamName.isEmpty() && type != null) {
+			Team team = new Team(teamName, type);
+			teamManagementPresenter.clearTeamName();
+			teams.add(team);
 			ganttPresenter.updateGantt();
+			teamManagementPresenter.synchronizeView();
 		}
 	}
+
 }

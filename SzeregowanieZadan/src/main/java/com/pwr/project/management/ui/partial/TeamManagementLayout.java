@@ -8,32 +8,37 @@ import com.pwr.project.management.presenter.GanttPresenter;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.*;
 
+import java.util.List;
+
 /**
  * Created by krzaczek on 22.01.15.
  */
 public class TeamManagementLayout extends HorizontalLayout {
 
-	private BeanContainer<String, Team> dataSource;
+	private BeanContainer<String, Team> dataContainer;
+	private TextField teamName;
+	private ComboBox typeSelector;
 
-	public TeamManagementLayout(BeanContainer<String, Team> dataSource, GanttPresenter ganttPresenter) {
-		this.dataSource = dataSource;
+	public TeamManagementLayout(List<Team> dataSource, CreateTeamListener createTeamListener, RemoveTeamClickListener removeTeamClickListener) {
+		this.dataContainer = new BeanContainer<>(Team.class);
+		this.dataContainer.setBeanIdProperty("name");
+		this.dataContainer.addAll(dataSource);
 		setSizeFull();
 		setMargin(true);
-		Layout removeLayout = createRemoveLayout(ganttPresenter);
-		Layout createLayout = createCreateLayout(ganttPresenter);
+		Layout removeLayout = createRemoveLayout(removeTeamClickListener);
+		Layout createLayout = createCreateLayout(createTeamListener);
 		addComponent(createLayout);
 		addComponent(removeLayout);
 		setExpandRatio(createLayout, 0.5F);
 		setExpandRatio(removeLayout, 0.5F);
 	}
 
-	private Layout createCreateLayout(GanttPresenter ganttPresenter) {
+	private Layout createCreateLayout(CreateTeamListener createTeamListener) {
 		FormLayout createLayout = new FormLayout();
 		createLayout.setSizeFull();
-		createLayout.setSizeFull();
-		TextField teamName = new TextField("Name:");
+		teamName = new TextField("Name:");
 		createLayout.addComponent(teamName);
-		ComboBox typeSelector = new ComboBox("Type:");
+		typeSelector = new ComboBox("Type:");
 		typeSelector.setInputPrompt("Select Type");
 		typeSelector.setTextInputAllowed(false);
 		typeSelector.setNullSelectionAllowed(false);
@@ -44,17 +49,18 @@ public class TeamManagementLayout extends HorizontalLayout {
 		createLayout.addComponent(typeSelector);
 		createLayout.addComponent(create);
 		createLayout.setComponentAlignment(create, Alignment.MIDDLE_CENTER);
-		create.addClickListener(new CreateTeamListener(dataSource, typeSelector, teamName, ganttPresenter));
+		create.addClickListener(createTeamListener);
 		return createLayout;
 	}
 
-	private Layout createRemoveLayout(GanttPresenter ganttPresenter) {
+	private Layout createRemoveLayout(RemoveTeamClickListener removeTeamClickListener) {
 		FormLayout chooseLayout = new FormLayout();
 		chooseLayout.setSizeFull();
 		ComboBox teams = createComboBox();
 		chooseLayout.addComponent(teams);
 		Button remove = new Button("Remove");
-		remove.addClickListener(new RemoveTeamClickListener(dataSource, teams, ganttPresenter));
+		removeTeamClickListener.setTeams(teams);
+		remove.addClickListener(removeTeamClickListener);
 		chooseLayout.addComponent(remove);
 		chooseLayout.setComponentAlignment(remove, Alignment.MIDDLE_CENTER);
 		return chooseLayout;
@@ -65,7 +71,24 @@ public class TeamManagementLayout extends HorizontalLayout {
 		comboBox.setInputPrompt("Select Team");
 		comboBox.setTextInputAllowed(false);
 		comboBox.setNullSelectionAllowed(false);
-		comboBox.setContainerDataSource(dataSource);
+		comboBox.setContainerDataSource(dataContainer);
 		return comboBox;
+	}
+
+	public void synchronizeTeams(List<Team> dataSource) {
+		dataContainer.removeAllItems();
+		dataContainer.addAll(dataSource);
+	}
+
+	public String getTeamName() {
+		return teamName.getValue();
+	}
+
+	public Type getType() {
+		return (Type) typeSelector.getValue();
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName.setValue(teamName);
 	}
 }

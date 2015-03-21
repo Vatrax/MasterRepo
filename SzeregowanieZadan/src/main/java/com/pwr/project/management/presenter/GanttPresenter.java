@@ -1,11 +1,14 @@
 package com.pwr.project.management.presenter;
 
-import com.pwr.project.management.algorythm.ProjectManager;
+import com.pwr.project.management.algorythm.Algorithm;
+import com.pwr.project.management.algorythm.BasicFlowAlgorithm;
 import com.pwr.project.management.exceptions.CannotCalculateException;
 import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.ui.partial.TeamView;
 import com.vaadin.data.util.BeanContainer;
+
+import java.util.List;
 
 /**
  * Created by krzaczek on 28.01.15.
@@ -13,19 +16,20 @@ import com.vaadin.data.util.BeanContainer;
 public class GanttPresenter {
 
 	private TeamView view;
-	private final BeanContainer<String, Team> teams;
-	private final BeanContainer<String, Project> projects;
-	private ProjectManager manager = new ProjectManager();
+	private final List<Team> teams;
+	private final List<Project> projects;
+	private Algorithm algorithm;
 
-	public GanttPresenter(TeamView view, BeanContainer<String, Team> teams, BeanContainer<String, Project> projects) {
+	public GanttPresenter(TeamView view, List<Team> teams, List<Project> projects, Algorithm algorithm) {
 		this.view = view;
 		this.teams = teams;
 		this.projects = projects;
+		this.algorithm = algorithm;
 	}
 
 	public void updateGantt() {
 		try {
-			manager.serialize(projects, teams);
+			algorithm.serialize(projects, teams);
 			view.drawSteps(teams);
 		} catch (CannotCalculateException e) {
 			view.removeSteps();

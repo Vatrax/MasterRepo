@@ -1,29 +1,45 @@
 package com.pwr.project.management.listeners;
 
+import com.pwr.project.management.model.Project;
+import com.pwr.project.management.model.Team;
 import com.pwr.project.management.presenter.GanttPresenter;
+import com.pwr.project.management.ui.ProjctManagementPresenter;
 import com.vaadin.data.Container;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
+
+import java.util.List;
 
 /**
  * Created by krzaczek on 22.01.15.
  */
 public class RemoveProjectClickListener implements Button.ClickListener {
-	private final Container dataSource;
-	private final ComboBox projects;
+	private ProjctManagementPresenter presenter;
+	private final List<Project> dataSource;
 	private GanttPresenter ganttPresenter;
 
-	public RemoveProjectClickListener(Container dataSource, ComboBox projects, GanttPresenter ganttPresenter) {
+	public RemoveProjectClickListener(ProjctManagementPresenter presenter, List<Project> dataSource, GanttPresenter ganttPresenter) {
+		this.presenter = presenter;
 		this.dataSource = dataSource;
-		this.projects = projects;
 		this.ganttPresenter = ganttPresenter;
 	}
 
 	@Override public void buttonClick(Button.ClickEvent clickEvent) {
-		if (projects.getValue() != null) {
-			dataSource.removeItem(projects.getValue());
+		if (presenter.getComboboxValue() != null) {
+			removeProject();
 			ganttPresenter.updateGantt();
+			presenter.synchronizeView();
 		}
-		projects.setValue(null);
+		presenter.clearProjectSelection();
+	}
+
+	private void removeProject() {
+		String projectName = presenter.getComboboxValue();
+		for(Project project : dataSource) {
+			if(project.getName().equals(projectName)) {
+				dataSource.remove(project);
+				break;
+			}
+		}
 	}
 }
