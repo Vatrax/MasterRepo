@@ -16,4 +16,6 @@ public interface Algorithm {
 	public long getTime();
 
 	public Date getCMax();
+
+	public double getProfit();
 }

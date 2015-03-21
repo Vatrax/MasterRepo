@@ -1,12 +1,9 @@
 package com.pwr.project.management.listeners;
 
 import com.pwr.project.management.model.Project;
-import com.pwr.project.management.model.Team;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.pwr.project.management.ui.ProjctManagementPresenter;
-import com.vaadin.data.Container;
+import com.pwr.project.management.presenter.ProjctManagementPresenter;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.ComboBox;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.pwr.project.management.ui;
+package com.pwr.project.management.presenter;
 
 import com.pwr.project.management.listeners.CreateTeamListener;
 import com.pwr.project.management.listeners.RemoveTeamClickListener;

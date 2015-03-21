@@ -2,8 +2,7 @@ package com.pwr.project.management.listeners;
 
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.pwr.project.management.ui.TeamManagementPresenter;
-import com.vaadin.data.util.BeanContainer;
+import com.pwr.project.management.presenter.TeamManagementPresenter;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 

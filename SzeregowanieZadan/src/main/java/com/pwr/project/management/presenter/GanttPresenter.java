@@ -20,11 +20,10 @@ public class GanttPresenter {
 	private final List<Project> projects;
 	private Algorithm algorithm;
 
-	public GanttPresenter(TeamView view, List<Team> teams, List<Project> projects, Algorithm algorithm) {
+	public GanttPresenter(TeamView view, List<Team> teams, List<Project> projects) {
 		this.view = view;
 		this.teams = teams;
 		this.projects = projects;
-		this.algorithm = algorithm;
 	}
 
 	public void updateGantt() {
@@ -36,4 +35,7 @@ public class GanttPresenter {
 		}
 	}
 
+	public void setAlgorithm(Algorithm algorithm) {
+		this.algorithm = algorithm;
+	}
 }

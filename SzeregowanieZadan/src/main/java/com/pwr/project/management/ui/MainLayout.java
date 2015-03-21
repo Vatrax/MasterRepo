@@ -6,12 +6,12 @@ import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Task;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.model.Type;
+import com.pwr.project.management.presenter.AlgorythmManagementPresenter;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.pwr.project.management.ui.partial.ProjectManagementLayout;
-import com.pwr.project.management.ui.partial.TeamManagementLayout;
+import com.pwr.project.management.presenter.ProjctManagementPresenter;
+import com.pwr.project.management.presenter.TeamManagementPresenter;
 import com.pwr.project.management.ui.partial.TeamView;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ public class MainLayout extends VerticalLayout {
 	private List<Team> teams = new ArrayList<>();
 	private TeamView teamView;
 	private List<Project> projects = new ArrayList<>();
-	private Algorithm currentAlgorithm = new BasicFlowAlgorithm();
 
 	public MainLayout() {
 		teams.add(new Team("MainBrickLayer", Type.BRICKLAYER));
@@ -40,22 +39,23 @@ public class MainLayout extends VerticalLayout {
 		tasks.add(new Task(21, Type.RENOVATOR));
 		projects.add(new Project("KrzaQ's Villa", tasks));
 		projects.add(new Project("Szymons's Cottage", tasks));
-		currentAlgorithm.serialize(projects, teams);
+//		currentAlgorithm.serialize(projects, teams);
 		init();
 		teamView.drawSteps(teams);
 	}
 
 	private void init() {
 		setSizeFull();
-
 		teamView = new TeamView();
 		addComponent(teamView);
-		GanttPresenter ganttPresenter = new GanttPresenter(teamView, teams, projects, currentAlgorithm);
+		GanttPresenter ganttPresenter = new GanttPresenter(teamView, teams, projects);
 		TeamManagementPresenter teamManagementPresenter = new TeamManagementPresenter(teams, ganttPresenter);
 		ProjctManagementPresenter projctManagementPresenter = new ProjctManagementPresenter(projects, ganttPresenter);
+		AlgorythmManagementPresenter algorythmManagementPesenter = new AlgorythmManagementPresenter(ganttPresenter);
 		HorizontalLayout managementLayout = new HorizontalLayout();
 		managementLayout.addComponent(teamManagementPresenter.createView());
 		managementLayout.addComponent(projctManagementPresenter.createLayout());
+		managementLayout.addComponent(algorythmManagementPesenter.createLayout());
 		addComponent(managementLayout);
 		setExpandRatio(teamView, 1F);
 		managementLayout.setHeight(350, Unit.PIXELS);

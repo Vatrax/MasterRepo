@@ -2,9 +2,8 @@ package com.pwr.project.management.listeners;
 
 import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Task;
-import com.pwr.project.management.model.Type;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.pwr.project.management.ui.ProjctManagementPresenter;
+import com.pwr.project.management.presenter.ProjctManagementPresenter;
 import com.vaadin.ui.Button;
 
 import java.util.List;

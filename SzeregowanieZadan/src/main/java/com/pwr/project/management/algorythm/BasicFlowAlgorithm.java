@@ -15,6 +15,7 @@ public class BasicFlowAlgorithm implements Algorithm {
 
 	private long time;
 	private Date cMax;
+	private double profit;
 
 	@Override
 	public void serialize(List<Project> projects, List<Team> teams) {
@@ -44,6 +45,10 @@ public class BasicFlowAlgorithm implements Algorithm {
 
 	@Override public Date getCMax() {
 		return cMax;
+	}
+
+	@Override public double getProfit() {
+		return profit;
 	}
 
 	private void clearTeamsTasks(List<Team> teams) {
