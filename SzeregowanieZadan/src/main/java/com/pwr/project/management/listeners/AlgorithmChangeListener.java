@@ -1,9 +1,9 @@
 package com.pwr.project.management.listeners;
 
 import com.pwr.project.management.algorythm.Algorithm;
+import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.presenter.AlgorythmManagementPresenter;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 
@@ -28,12 +28,13 @@ public class AlgorithmChangeListener implements ValueChangeListener {
 	@Override public void valueChange(ValueChangeEvent event) {
 		String algorithmName = event.getProperty().getValue().toString();
 		for (Algorithm algorithm : algorithms) {
-			if(algorithmName.equals(algorithm.getClass().getSimpleName())) {
+			if (algorithmName.equals(algorithm.getClass().getSimpleName())) {
 				ganttPresenter.setAlgorithm(algorithm);
-		ganttPresenter.updateGantt();
-		algorythmManagementPresenter.setTime(algorithm.getTime());
-		algorythmManagementPresenter.setDate(algorithm.getCMax());
-		algorythmManagementPresenter.setProfit(algorithm.getProfit());
+				ganttPresenter.updateGantt();
+				AlgorithmAnalyser algorithmAnalyser = ganttPresenter.getAlgorithmAnalyser();
+				algorythmManagementPresenter.setTime(algorithmAnalyser.getTime());
+				algorythmManagementPresenter.setDate(algorithmAnalyser.getEndDate());
+				algorythmManagementPresenter.setProfit(algorithmAnalyser.getProfit());
 				break;
 			}
 		}

@@ -13,9 +13,4 @@ public interface Algorithm {
 
 	public void serialize(List<Project> projects, List<Team> teams);
 
-	public long getTime();
-
-	public Date getCMax();
-
-	public double getProfit();
 }

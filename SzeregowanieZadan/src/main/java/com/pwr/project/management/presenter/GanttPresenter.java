@@ -1,12 +1,11 @@
 package com.pwr.project.management.presenter;
 
 import com.pwr.project.management.algorythm.Algorithm;
-import com.pwr.project.management.algorythm.BasicFlowAlgorithm;
+import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.exceptions.CannotCalculateException;
 import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.ui.partial.TeamView;
-import com.vaadin.data.util.BeanContainer;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
  */
 public class GanttPresenter {
 
+	private final AlgorithmAnalyser algorithmAnalyser;
 	private TeamView view;
 	private final List<Team> teams;
 	private final List<Project> projects;
@@ -24,11 +24,12 @@ public class GanttPresenter {
 		this.view = view;
 		this.teams = teams;
 		this.projects = projects;
+		algorithmAnalyser = new AlgorithmAnalyser();
 	}
 
 	public void updateGantt() {
 		try {
-			algorithm.serialize(projects, teams);
+			algorithmAnalyser.runWithAnalyse(algorithm, projects, teams);
 			view.drawSteps(teams);
 		} catch (CannotCalculateException e) {
 			view.removeSteps();
@@ -37,5 +38,9 @@ public class GanttPresenter {
 
 	public void setAlgorithm(Algorithm algorithm) {
 		this.algorithm = algorithm;
+	}
+
+	public AlgorithmAnalyser getAlgorithmAnalyser() {
+		return algorithmAnalyser;
 	}
 }

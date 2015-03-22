@@ -37,7 +37,7 @@ public class AlgorythmManagementPresenter {
 	}
 
 	public void setTime(long time) {
-		layout.setTime("Time: " + time);
+		layout.setTime("Time: " + time + "ms");
 	}
 
 	public void setDate(Date cMax) {

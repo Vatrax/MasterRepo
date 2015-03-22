@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class AlgorithmManagementLayout extends VerticalLayout {
 
-	private final Label timeLabel = new Label("siema");
-	private final Label endTimeLabel = new Label("yo");
-	private final Label profitLabel = new Label("jaktam");
+	private final Label timeLabel = new Label();
+	private final Label endTimeLabel = new Label();
+	private final Label profitLabel = new Label();
 
 	public AlgorithmManagementLayout(List<Algorithm> algorithms, AlgorithmChangeListener algorithmChangeListener) {
 		setSizeFull();
