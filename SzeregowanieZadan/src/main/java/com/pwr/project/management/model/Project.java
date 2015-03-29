@@ -1,5 +1,6 @@
 package com.pwr.project.management.model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,10 +10,18 @@ public class Project {
 
 	private String name;
 	private List<Task> tasks;
+	private final int price;
+	private final Date expectedEndDate;
+	private final int bonus;
+	private final int punishment;
 
-	public Project(String name, List<Task> tasks) {
+	public Project(String name, List<Task> tasks, int price, Date expectedEndDate, int bonus, int punishment) {
 		this.name = name;
 		this.tasks = tasks;
+		this.price = price;
+		this.expectedEndDate = expectedEndDate;
+		this.bonus = bonus;
+		this.punishment = punishment;
 	}
 
 	public String getName() {
@@ -29,6 +38,22 @@ public class Project {
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public Date getExpectedEndDate() {
+		return expectedEndDate;
+	}
+
+	public int getBonus() {
+		return bonus;
+	}
+
+	public int getPunishment() {
+		return punishment;
 	}
 
 	@Override

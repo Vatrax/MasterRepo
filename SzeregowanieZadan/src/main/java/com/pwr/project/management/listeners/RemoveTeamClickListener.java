@@ -1,6 +1,7 @@
 package com.pwr.project.management.listeners;
 
 import com.pwr.project.management.model.Team;
+import com.pwr.project.management.presenter.AlgorythmManagementPresenter;
 import com.pwr.project.management.presenter.GanttPresenter;
 import com.pwr.project.management.presenter.TeamManagementPresenter;
 import com.vaadin.ui.Button;
@@ -17,12 +18,14 @@ public class RemoveTeamClickListener implements Button.ClickListener {
 	private ComboBox teams;
 	private GanttPresenter ganttPresenter;
 	private TeamManagementPresenter teamManagementPresenter;
+	private AlgorythmManagementPresenter algorythmManagementPresenter;
 
 	public RemoveTeamClickListener(List<Team> dataSource, GanttPresenter ganttPresenter,
-			TeamManagementPresenter teamManagementPresenter) {
+			TeamManagementPresenter teamManagementPresenter, AlgorythmManagementPresenter algorythmManagementPresenter) {
 		this.dataSource = dataSource;
 		this.ganttPresenter = ganttPresenter;
 		this.teamManagementPresenter = teamManagementPresenter;
+		this.algorythmManagementPresenter = algorythmManagementPresenter;
 	}
 
 	@Override public void buttonClick(Button.ClickEvent clickEvent) {
@@ -30,6 +33,7 @@ public class RemoveTeamClickListener implements Button.ClickListener {
 			removeTeam();
 			ganttPresenter.updateGantt();
 			teamManagementPresenter.synchronizeView();
+			algorythmManagementPresenter.updateAlgorythmResults(ganttPresenter.getAlgorithmAnalyser());
 		}
 		teams.setValue(null);
 	}

@@ -12,12 +12,14 @@ public class Team implements Serializable, Comparable {
 
 	private String name;
 	private Type type;
+	private int cost;
 	private List<AssignedTask> tasks = new ArrayList<AssignedTask>();
 	private Date end = new Date();
 
-	public Team(String name, Type type) {
+	public Team(String name, Type type, int cost) {
 		this.name = name;
 		this.type = type;
+		this.cost = cost;
 	}
 
 	public Type getType() {
@@ -50,6 +52,14 @@ public class Team implements Serializable, Comparable {
 
 	public void setEnd(Date end) {
 		this.end = end;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.pwr.project.management.presenter;
 
 import com.pwr.project.management.algorythm.Algorithm;
 import com.pwr.project.management.algorythm.BasicFlowAlgorithm;
-import com.pwr.project.management.algorythm.DummyAlgorithm;
+import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
 import com.pwr.project.management.ui.partial.AlgorithmManagementLayout;
 import com.vaadin.ui.Layout;
@@ -27,7 +27,6 @@ public class AlgorythmManagementPresenter {
 
 	private void populateAlgorithms() {
 		algorithms.add(new BasicFlowAlgorithm());
-		algorithms.add(new DummyAlgorithm());
 	}
 
 	public Layout createLayout() {
@@ -49,7 +48,13 @@ public class AlgorythmManagementPresenter {
 		layout.setDate(date);
 	}
 
-	public void setProfit(double profit) {
-		layout.setProfit("Profit: " + profit);
+	public void setProfit(int profit) {
+		layout.setProfit("Profit: " + profit + "$");
+	}
+
+	public void updateAlgorythmResults(AlgorithmAnalyser algorithmAnalyser) {
+		setTime(algorithmAnalyser.getTime());
+		setDate(algorithmAnalyser.getEndDate());
+		setProfit(algorithmAnalyser.getProfit());
 	}
 }

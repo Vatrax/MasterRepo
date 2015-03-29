@@ -21,6 +21,7 @@ public class AlgorithmManagementLayout extends VerticalLayout {
 	public AlgorithmManagementLayout(List<Algorithm> algorithms, AlgorithmChangeListener algorithmChangeListener) {
 		setSizeFull();
 		setMargin(true);
+		setSpacing(true);
 		addComponent(createAlgorithmPicker(algorithms, algorithmChangeListener));
 		addComponent(timeLabel);
 		addComponent(endTimeLabel);

@@ -1,13 +1,16 @@
 package com.pwr.project.management.ui.partial;
 
+import com.pwr.project.management.components.IntegerField;
 import com.pwr.project.management.listeners.CreateProjectListener;
 import com.pwr.project.management.listeners.RemoveProjectClickListener;
 import com.pwr.project.management.model.Project;
-import com.pwr.project.management.presenter.GanttPresenter;
 import com.vaadin.data.util.BeanContainer;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
+import com.vaadin.ui.Button.ClickListener;
 import org.vaadin.risto.stepper.IntStepper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +25,10 @@ public class ProjectManagementLayout extends HorizontalLayout {
 	private IntStepper electrical;
 	private IntStepper plumbing;
 	private IntStepper renovate;
+	private DateField expectedEndDate;
+	private IntegerField profit;
+	private IntegerField bonus;
+	private IntegerField punishment;
 
 	public ProjectManagementLayout(List<Project> dataSource, RemoveProjectClickListener removeListener,
 			CreateProjectListener createProjectListener) {
@@ -36,12 +43,32 @@ public class ProjectManagementLayout extends HorizontalLayout {
 		addComponent(removeLayout);
 	}
 
-	private Layout createCreationLayout(Button.ClickListener createProjectListener) {
-		FormLayout creationLayout = new FormLayout();
+	private Layout createCreationLayout(ClickListener createProjectListener) {
+		GridLayout creationLayout = new GridLayout(2, 6);
 		creationLayout.setSizeFull();
-		creationLayout.setMargin(true);
+		creationLayout.setSpacing(true);
 		projectName = new TextField("Project name:");
-		creationLayout.addComponent(projectName);
+		creationLayout.addComponent(projectName, 0, 0, 1, 0);
+		addTasksSpinners(creationLayout);
+		expectedEndDate = new DateField("Expected end date");
+		creationLayout.addComponent(expectedEndDate);
+		profit = new IntegerField("Profit", 10000);
+		creationLayout.addComponent(profit);
+		bonus = new IntegerField("Bonus[$/day]", 1000);
+		creationLayout.addComponent(bonus);
+		punishment = new IntegerField("Punishment[$/day]", 500);
+		creationLayout.addComponent(punishment);
+		creationLayout.addComponent(createCreationButton(createProjectListener));
+		return creationLayout;
+	}
+
+	private Button createCreationButton(ClickListener createProjectListener) {
+		Button createButton = new Button("Create project");
+		createButton.addClickListener(createProjectListener);
+		return createButton;
+	}
+
+	private void addTasksSpinners(GridLayout creationLayout) {
 		brickLaying = createStepper("Bricklaying[Days]:");
 		creationLayout.addComponent(brickLaying);
 		electrical = createStepper("Electrical[Days]:");
@@ -50,10 +77,6 @@ public class ProjectManagementLayout extends HorizontalLayout {
 		creationLayout.addComponent(plumbing);
 		renovate = createStepper("Renovate[Days]:");
 		creationLayout.addComponent(renovate);
-		Button createButton = new Button("Create project");
-		createButton.addClickListener(createProjectListener);
-		creationLayout.addComponent(createButton);
-		return creationLayout;
 	}
 
 	private IntStepper createStepper(String caption) {
@@ -62,17 +85,22 @@ public class ProjectManagementLayout extends HorizontalLayout {
 		return renovate;
 	}
 
-	private Layout createRemoveLayout(Button.ClickListener removeListener) {
-		FormLayout chooseLayout = new FormLayout();
+	private Layout createRemoveLayout(ClickListener removeListener) {
+		VerticalLayout chooseLayout = new VerticalLayout();
+		chooseLayout.setSpacing(true);
 		chooseLayout.setSizeFull();
-		chooseLayout.setMargin(true);
-		ComboBox teams = createComboBox();
-		chooseLayout.addComponent(teams);
+		chooseLayout.setMargin(new MarginInfo(false, false, false, true));
+		chooseLayout.addComponent(createComboBox());
+		Button removeButton = createRemoveButton(removeListener);
+		chooseLayout.addComponent(removeButton);
+		chooseLayout.setComponentAlignment(removeButton, Alignment.MIDDLE_CENTER);
+		return chooseLayout;
+	}
+
+	private Button createRemoveButton(ClickListener removeListener) {
 		Button remove = new Button("Remove");
 		remove.addClickListener(removeListener);
-		chooseLayout.addComponent(remove);
-		chooseLayout.setComponentAlignment(remove, Alignment.MIDDLE_CENTER);
-		return chooseLayout;
+		return remove;
 	}
 
 	private ComboBox createComboBox() {
@@ -97,7 +125,7 @@ public class ProjectManagementLayout extends HorizontalLayout {
 		projectsCombobox.setValue(project);
 	}
 
-	public String getPojectName() {
+	public String getProjectName() {
 		return projectName.getValue();
 	}
 
@@ -135,5 +163,37 @@ public class ProjectManagementLayout extends HorizontalLayout {
 
 	public void setRenovateValues(int value) {
 		renovate.setValue(value);
+	}
+
+	public String getPriceValue() {
+		return profit.getValue();
+	}
+
+	public Date getExpectedEndDateValue() {
+		return expectedEndDate.getValue();
+	}
+
+	public String getBonusValue() {
+		return bonus.getValue();
+	}
+
+	public String getPunishmentValue() {
+		return punishment.getValue();
+	}
+
+	public void setDateValue(Date date) {
+		expectedEndDate.setValue(date);
+	}
+
+	public void setPunishmentValue(int punishmentValue) {
+		punishment.setValue("" + punishmentValue);
+	}
+
+	public void setBonusValue(int bonusValue) {
+		bonus.setValue("" + bonusValue);
+	}
+
+	public void setProfitValue(int profitValue) {
+		profit.setValue("" + profitValue);
 	}
 }

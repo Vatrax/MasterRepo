@@ -1,8 +1,9 @@
 package com.pwr.project.management.listeners;
 
 import com.pwr.project.management.model.Project;
+import com.pwr.project.management.presenter.AlgorythmManagementPresenter;
 import com.pwr.project.management.presenter.GanttPresenter;
-import com.pwr.project.management.presenter.ProjctManagementPresenter;
+import com.pwr.project.management.presenter.ProjectManagementPresenter;
 import com.vaadin.ui.Button;
 
 import java.util.List;
@@ -11,20 +12,24 @@ import java.util.List;
  * Created by krzaczek on 22.01.15.
  */
 public class RemoveProjectClickListener implements Button.ClickListener {
-	private ProjctManagementPresenter presenter;
+	private ProjectManagementPresenter presenter;
 	private final List<Project> dataSource;
 	private GanttPresenter ganttPresenter;
+	private AlgorythmManagementPresenter algorythmManagementPresenter;
 
-	public RemoveProjectClickListener(ProjctManagementPresenter presenter, List<Project> dataSource, GanttPresenter ganttPresenter) {
+	public RemoveProjectClickListener(ProjectManagementPresenter presenter, List<Project> dataSource,
+			GanttPresenter ganttPresenter, AlgorythmManagementPresenter algorythmManagementPresenter) {
 		this.presenter = presenter;
 		this.dataSource = dataSource;
 		this.ganttPresenter = ganttPresenter;
+		this.algorythmManagementPresenter = algorythmManagementPresenter;
 	}
 
 	@Override public void buttonClick(Button.ClickEvent clickEvent) {
 		if (presenter.getComboboxValue() != null) {
 			removeProject();
 			ganttPresenter.updateGantt();
+			algorythmManagementPresenter.updateAlgorythmResults(ganttPresenter.getAlgorithmAnalyser());
 			presenter.synchronizeView();
 		}
 		presenter.clearProjectSelection();

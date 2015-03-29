@@ -31,10 +31,7 @@ public class AlgorithmChangeListener implements ValueChangeListener {
 			if (algorithmName.equals(algorithm.getClass().getSimpleName())) {
 				ganttPresenter.setAlgorithm(algorithm);
 				ganttPresenter.updateGantt();
-				AlgorithmAnalyser algorithmAnalyser = ganttPresenter.getAlgorithmAnalyser();
-				algorythmManagementPresenter.setTime(algorithmAnalyser.getTime());
-				algorythmManagementPresenter.setDate(algorithmAnalyser.getEndDate());
-				algorythmManagementPresenter.setProfit(algorithmAnalyser.getProfit());
+				algorythmManagementPresenter.updateAlgorythmResults(ganttPresenter.getAlgorithmAnalyser());
 				break;
 			}
 		}

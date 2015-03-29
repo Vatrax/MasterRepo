@@ -1,11 +1,12 @@
 package com.pwr.project.management.ui.partial;
 
+import com.pwr.project.management.components.IntegerField;
 import com.pwr.project.management.listeners.CreateTeamListener;
 import com.pwr.project.management.listeners.RemoveTeamClickListener;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.model.Type;
-import com.pwr.project.management.presenter.GanttPresenter;
 import com.vaadin.data.util.BeanContainer;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 
 import java.util.List;
@@ -17,9 +18,11 @@ public class TeamManagementLayout extends HorizontalLayout {
 
 	private BeanContainer<String, Team> dataContainer;
 	private TextField teamName;
+	private TextField teamPrice;
 	private ComboBox typeSelector;
 
-	public TeamManagementLayout(List<Team> dataSource, CreateTeamListener createTeamListener, RemoveTeamClickListener removeTeamClickListener) {
+	public TeamManagementLayout(List<Team> dataSource, CreateTeamListener createTeamListener,
+			RemoveTeamClickListener removeTeamClickListener) {
 		this.dataContainer = new BeanContainer<>(Team.class);
 		this.dataContainer.setBeanIdProperty("name");
 		this.dataContainer.addAll(dataSource);
@@ -34,7 +37,8 @@ public class TeamManagementLayout extends HorizontalLayout {
 	}
 
 	private Layout createCreateLayout(CreateTeamListener createTeamListener) {
-		FormLayout createLayout = new FormLayout();
+		VerticalLayout createLayout = new VerticalLayout();
+		createLayout.setSpacing(true);
 		createLayout.setSizeFull();
 		teamName = new TextField("Name:");
 		createLayout.addComponent(teamName);
@@ -45,6 +49,8 @@ public class TeamManagementLayout extends HorizontalLayout {
 		for (Type type : Type.values()) {
 			typeSelector.addItem(type);
 		}
+		teamPrice = new IntegerField("Price per day[$]:", 100);
+		createLayout.addComponent(teamPrice);
 		Button create = new Button("Create Team");
 		createLayout.addComponent(typeSelector);
 		createLayout.addComponent(create);
@@ -54,8 +60,10 @@ public class TeamManagementLayout extends HorizontalLayout {
 	}
 
 	private Layout createRemoveLayout(RemoveTeamClickListener removeTeamClickListener) {
-		FormLayout chooseLayout = new FormLayout();
+		VerticalLayout chooseLayout = new VerticalLayout();
+		chooseLayout.setMargin(new MarginInfo(false, false, false, true));
 		chooseLayout.setSizeFull();
+		chooseLayout.setSpacing(true);
 		ComboBox teams = createComboBox();
 		chooseLayout.addComponent(teams);
 		Button remove = new Button("Remove");
@@ -90,5 +98,13 @@ public class TeamManagementLayout extends HorizontalLayout {
 
 	public void setTeamName(String teamName) {
 		this.teamName.setValue(teamName);
+	}
+
+	public String getPrice() {
+		return teamPrice.getValue();
+	}
+
+	public void setDefaultTeamPrice(Integer teamPrice) {
+		this.teamPrice.setValue("" + teamPrice);
 	}
 }

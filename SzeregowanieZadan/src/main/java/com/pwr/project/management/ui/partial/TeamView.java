@@ -30,7 +30,6 @@ public class TeamView extends Gantt {
 		cal.add(Calendar.YEAR, 1);
 		setEndDate(cal.getTime());
 		cal.setTime(new Date());
-
 	}
 
 	public void drawSteps(List<Team> teams) {
