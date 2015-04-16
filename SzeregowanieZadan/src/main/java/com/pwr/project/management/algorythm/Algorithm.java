@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface Algorithm {
 
-	public void serialize(List<Project> projects, List<Team> teams);
+	void serialize(List<Project> projects, List<Team> teams);
 
 }
