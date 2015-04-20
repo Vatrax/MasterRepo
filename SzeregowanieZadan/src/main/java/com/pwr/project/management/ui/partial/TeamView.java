@@ -24,7 +24,6 @@ public class TeamView extends Gantt {
 		setSizeFull();
 		setResizableSteps(false);
 		setMovableSteps(false);
-		setLocale(UI.getCurrent().getLocale());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		setStartDate(cal.getTime());

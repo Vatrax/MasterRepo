@@ -51,7 +51,6 @@ public class ProjectManagementLayout extends HorizontalLayout {
 		creationLayout.addComponent(projectName, 0, 0, 1, 0);
 		addTasksSpinners(creationLayout);
 		expectedEndDate = new DateField("Expected end date");
-		expectedEndDate.setLocale(UI.getCurrent().getLocale());
 		creationLayout.addComponent(expectedEndDate);
 		profit = new IntegerField("Profit", 10000);
 		creationLayout.addComponent(profit);
