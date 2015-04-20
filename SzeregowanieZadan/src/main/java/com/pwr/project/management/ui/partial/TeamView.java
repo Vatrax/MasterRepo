@@ -2,6 +2,7 @@ package com.pwr.project.management.ui.partial;
 
 import com.pwr.project.management.model.AssignedTask;
 import com.pwr.project.management.model.Team;
+import com.vaadin.ui.UI;
 import org.tltv.gantt.Gantt;
 import org.tltv.gantt.client.shared.Step;
 
@@ -23,7 +24,7 @@ public class TeamView extends Gantt {
 		setSizeFull();
 		setResizableSteps(false);
 		setMovableSteps(false);
-		setLocale(Locale.ENGLISH);
+		setLocale(UI.getCurrent().getLocale());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		setStartDate(cal.getTime());
