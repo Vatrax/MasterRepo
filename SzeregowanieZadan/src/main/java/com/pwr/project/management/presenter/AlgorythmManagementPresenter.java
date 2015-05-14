@@ -3,6 +3,7 @@ package com.pwr.project.management.presenter;
 import com.pwr.project.management.algorythm.Algorithm;
 import com.pwr.project.management.algorythm.BasicFlowAlgorithm;
 import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
+import com.pwr.project.management.algorythm.TabuSearchAlgorithm;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
 import com.pwr.project.management.ui.partial.AlgorithmManagementLayout;
 import com.vaadin.ui.Layout;
@@ -27,6 +28,7 @@ public class AlgorythmManagementPresenter {
 
 	private void populateAlgorithms() {
 		algorithms.add(new BasicFlowAlgorithm());
+		algorithms.add(new TabuSearchAlgorithm());
 	}
 
 	public Layout createLayout() {
