@@ -38,9 +38,9 @@ public class MainLayout extends VerticalSplitPanel {
 		tasks.add(new Task(21, Type.RENOVATOR));
 		Calendar instance = Calendar.getInstance();
 		instance.add(Calendar.MONTH, 1);
-		projects.add(new Project("KrzaQ's Villa", tasks, 200000, instance.getTime(),200, 400));
+		projects.add(new Project("Villa", tasks, 200000, instance.getTime(),200, 400));
 		instance.add(Calendar.MONTH, 1);
-		projects.add(new Project("Szymons's Cottage", tasks, 100000, instance.getTime(),100,0));
+		projects.add(new Project("Cottage", tasks, 100000, instance.getTime(),100,0));
 		init();
 		teamView.drawSteps(teams);
 	}
@@ -50,11 +50,13 @@ public class MainLayout extends VerticalSplitPanel {
 		teamView = new TeamView();
 		addComponent(teamView);
 		GanttPresenter ganttPresenter = new GanttPresenter(teamView, teams, projects);
-		AlgorythmManagementPresenter algorythmManagementPresenter = new AlgorythmManagementPresenter(ganttPresenter);
+		AlgorythmManagementPresenter algorythmManagementPresenter = new AlgorythmManagementPresenter(ganttPresenter,
+				projects);
 		TeamManagementPresenter teamManagementPresenter = new TeamManagementPresenter(teams, ganttPresenter,
 				algorythmManagementPresenter);
 		ProjectManagementPresenter projectManagementPresenter = new ProjectManagementPresenter(projects, ganttPresenter,
 				algorythmManagementPresenter);
+		algorythmManagementPresenter.setProjectPresenter(projectManagementPresenter);
 		HorizontalLayout managementLayout = new HorizontalLayout();
 		managementLayout.addComponent(teamManagementPresenter.createView());
 		managementLayout.addComponent(projectManagementPresenter.createLayout());

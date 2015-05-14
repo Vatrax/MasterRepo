@@ -5,6 +5,8 @@ import com.pwr.project.management.algorythm.BasicFlowAlgorithm;
 import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.algorythm.TabuSearchAlgorithm;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
+import com.pwr.project.management.listeners.DataGeneratorListener;
+import com.pwr.project.management.model.Project;
 import com.pwr.project.management.ui.partial.AlgorithmManagementLayout;
 import com.vaadin.ui.Layout;
 
@@ -18,11 +20,14 @@ import java.util.List;
  */
 public class AlgorythmManagementPresenter {
 	private GanttPresenter ganttPresenter;
+	private List<Project> projects;
+	private ProjectManagementPresenter projectManagementPresenter;
 	private List<Algorithm> algorithms = new ArrayList<>();
 	private AlgorithmManagementLayout layout;
 
-	public AlgorythmManagementPresenter(GanttPresenter ganttPresenter) {
+	public AlgorythmManagementPresenter(GanttPresenter ganttPresenter, List<Project> projects) {
 		this.ganttPresenter = ganttPresenter;
+		this.projects = projects;
 		populateAlgorithms();
 	}
 
@@ -33,7 +38,7 @@ public class AlgorythmManagementPresenter {
 
 	public Layout createLayout() {
 		layout = new AlgorithmManagementLayout(algorithms,
-				new AlgorithmChangeListener(this, ganttPresenter, algorithms));
+				new AlgorithmChangeListener(this, ganttPresenter, algorithms), new DataGeneratorListener(this, projects, ganttPresenter, projectManagementPresenter));
 		return layout;
 	}
 
@@ -58,5 +63,18 @@ public class AlgorythmManagementPresenter {
 		setTime(algorithmAnalyser.getTime());
 		setDate(algorithmAnalyser.getEndDate());
 		setProfit(algorithmAnalyser.getProfit());
+	}
+
+	public int getNumberOfProjects() {
+		String value = layout.getTextFiledValue();
+		return value == null? 0 : Integer.valueOf(layout.getTextFiledValue());
+	}
+
+	public void setNumberOfProjects(int value) {
+		layout.setNumberOfProjects(value);
+	}
+
+	public void setProjectPresenter(ProjectManagementPresenter projectManagementPresenter) {
+		this.projectManagementPresenter = projectManagementPresenter;
 	}
 }

@@ -1,11 +1,11 @@
 package com.pwr.project.management.ui.partial;
 
 import com.pwr.project.management.algorythm.Algorithm;
+import com.pwr.project.management.components.IntegerField;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
+import com.pwr.project.management.listeners.DataGeneratorListener;
 import com.vaadin.data.Property.ValueChangeListener;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 import java.util.List;
 
@@ -17,8 +17,10 @@ public class AlgorithmManagementLayout extends VerticalLayout {
 	private final Label timeLabel = new Label();
 	private final Label endTimeLabel = new Label();
 	private final Label profitLabel = new Label();
+	private IntegerField numberOfProjects;
 
-	public AlgorithmManagementLayout(List<Algorithm> algorithms, AlgorithmChangeListener algorithmChangeListener) {
+	public AlgorithmManagementLayout(List<Algorithm> algorithms, AlgorithmChangeListener algorithmChangeListener,
+			DataGeneratorListener dataGeneratorListener) {
 		setSizeFull();
 		setMargin(true);
 		setSpacing(true);
@@ -26,6 +28,18 @@ public class AlgorithmManagementLayout extends VerticalLayout {
 		addComponent(timeLabel);
 		addComponent(endTimeLabel);
 		addComponent(profitLabel);
+		addComponent(createDataGenerator(dataGeneratorListener));
+	}
+
+	private Layout createDataGenerator(DataGeneratorListener dataGeneratorListener) {
+		VerticalLayout layout = new VerticalLayout();
+		layout.setSpacing(true);
+		numberOfProjects = new IntegerField("Number of Projects", 1);
+		layout.addComponent(numberOfProjects);
+		Button generateProjectsButton = new Button("Generate Projects");
+		generateProjectsButton.addClickListener(dataGeneratorListener);
+		layout.addComponent(generateProjectsButton);
+		return layout;
 	}
 
 	private ComboBox createAlgorithmPicker(List<Algorithm> algorithms,
@@ -51,5 +65,13 @@ public class AlgorithmManagementLayout extends VerticalLayout {
 
 	public void setProfit(String profit) {
 		profitLabel.setValue(profit);
+	}
+
+	public String getTextFiledValue() {
+		return numberOfProjects.getValue();
+	}
+
+	public void setNumberOfProjects(int value) {
+		numberOfProjects.setValue("" + value);
 	}
 }
