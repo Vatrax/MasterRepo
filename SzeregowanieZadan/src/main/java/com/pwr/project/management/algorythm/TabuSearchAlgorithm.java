@@ -3,28 +3,40 @@ package com.pwr.project.management.algorythm;
 import com.google.common.collect.ImmutableList;
 import com.pwr.project.management.algorythm.analyser.ResultAnalyser;
 import com.pwr.project.management.exceptions.CannotCalculateException;
+import com.pwr.project.management.exceptions.TooLowNumberOfProjectsException;
 import com.pwr.project.management.model.*;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by krzaczek on 25.04.15.
  */
 public class TabuSearchAlgorithm implements Algorithm {
 
+	private static final Logger LOG = Logger.getLogger("TabuSearchAlgorithm");
+
 	@Override
 	public void serialize(List<Project> projects, List<Team> teams) {
+		LOG.info("Init algorithm");
+		if (projects.size() < 3) {
+			throw new TooLowNumberOfProjectsException("To low number of projects");
+		}
 		ResultAnalyser resultAnalyser = new ResultAnalyser();
 		int numberOfIterations = projects.size();
 		int tabuSize = projects.size();
 		int maxProfit = Integer.MIN_VALUE;
 		ImmutableList<Project> projectsBackup = ImmutableList.copyOf(projects);
 		List<Project> bestResult = null;
+		LOG.info("Start algorithm");
 		for (int i = 0; i < numberOfIterations; i++) {
 			projects = createTabuNeighbourhood(projectsBackup, i);
 			Set<ArrayList<String>> tabus = new HashSet<>();
 			int newTabuSize;
+			LOG.info("Searching Neighbours");
+			int iterationCouter = 0;
 			do {
+				iterationCouter++;
 				int tabusSize = tabus.size();
 				//order projects
 				projects = permuteProjects(projects, tabus);
@@ -40,9 +52,15 @@ public class TabuSearchAlgorithm implements Algorithm {
 					maxProfit = profit;
 					bestResult = new ArrayList<>(projects);
 				}
-			} while (newTabuSize < tabuSize);
+			} while (newTabuSize < tabuSize && isNotEndlessLoop(tabuSize, iterationCouter));
 		}
+		LOG.info("Assign tasks for teams");
 		assignTasks(bestResult, teams);
+		LOG.info("DONE");
+	}
+
+	private boolean isNotEndlessLoop(int tabuSize, int iterationCouter) {
+		return iterationCouter < tabuSize*100;
 	}
 
 	private List<Project> createTabuNeighbourhood(ImmutableList<Project> projectsBackup, int i) {
@@ -53,10 +71,10 @@ public class TabuSearchAlgorithm implements Algorithm {
 	}
 
 	private List<Project> permuteProjects(List<Project> projects, Set<ArrayList<String>> tabus) {
-		int projectToSwap = selectRandomProjectWihoutRoot(projects);
-		int project2ToSwap = selectRandomProjectWihoutRoot(projects);
+		int projectToSwap = selectRandomProjectWithoutRoot(projects);
+		int project2ToSwap = selectRandomProjectWithoutRoot(projects);
 		while (projectToSwap == project2ToSwap) {
-			project2ToSwap = selectRandomProjectWihoutRoot(projects);
+			project2ToSwap = selectRandomProjectWithoutRoot(projects);
 		}
 		Collections.swap(projects, projectToSwap, project2ToSwap);
 		ArrayList<String> tabu = new ArrayList<>();
@@ -67,7 +85,7 @@ public class TabuSearchAlgorithm implements Algorithm {
 		return projects;
 	}
 
-	private int selectRandomProjectWihoutRoot(List<Project> projects) {
+	private int selectRandomProjectWithoutRoot(List<Project> projects) {
 		return (int) (Math.random() * (projects.size() - 1) + 1);
 	}
 
@@ -111,7 +129,7 @@ public class TabuSearchAlgorithm implements Algorithm {
 			}
 		}
 		if (bestTeam == null) {
-			throw new CannotCalculateException();
+			throw new CannotCalculateException("Not possible to calculate. No required teams.");
 		}
 		return bestTeam;
 	}
@@ -135,7 +153,7 @@ public class TabuSearchAlgorithm implements Algorithm {
 		tasks.add(new Task(7, Type.ELECTRICIAN));
 		tasks.add(new Task(10, Type.PLUMBER));
 		tasks.add(new Task(21, Type.RENOVATOR));
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3; i++) {
 			projects.add(new Project("KrzaQ's Villa" + i, tasks, i * 1000000, instance.getTime(), i * 200, i * 400));
 		}
 		List<Team> teams = new ArrayList<>();

@@ -54,7 +54,7 @@ public class BasicFlowAlgorithm implements Algorithm {
 			}
 		}
 		if (bestTeam == null) {
-			throw new CannotCalculateException();
+			throw new CannotCalculateException("Not possible to calculate. No required teams.");
 		}
 		return bestTeam;
 	}

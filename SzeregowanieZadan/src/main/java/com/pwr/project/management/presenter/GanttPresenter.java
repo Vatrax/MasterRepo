@@ -2,17 +2,19 @@ package com.pwr.project.management.presenter;
 
 import com.pwr.project.management.algorythm.Algorithm;
 import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
-import com.pwr.project.management.exceptions.CannotCalculateException;
 import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Team;
 import com.pwr.project.management.ui.partial.TeamView;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by krzaczek on 28.01.15.
  */
 public class GanttPresenter {
+
+	private static final Logger LOG = Logger.getLogger("GanttPresenter");
 
 	private final AlgorithmAnalyser algorithmAnalyser;
 	private TeamView view;
@@ -31,8 +33,9 @@ public class GanttPresenter {
 		try {
 			algorithmAnalyser.runWithAnalyse(algorithm, projects, teams);
 			view.drawSteps(teams);
-		} catch (CannotCalculateException e) {
+		} catch (RuntimeException e) {
 			view.removeSteps();
+			LOG.info(e.getMessage());
 		}
 	}
 
