@@ -28,7 +28,7 @@ public class MainLayout extends VerticalSplitPanel {
 	public MainLayout() {
 		teams.add(new Team("MainBrickLayer", Type.BRICKLAYER, 200));
 		teams.add(new Team("MainElectrician", Type.ELECTRICIAN, 300));
-		teams.add(new Team("MainPlumber", Type.PLUMBER,  400));
+		teams.add(new Team("MainPlumber", Type.PLUMBER, 400));
 		teams.add(new Team("MainRenovator", Type.RENOVATOR, 350));
 		teams.add(new Team("SecondaryRenovator", Type.RENOVATOR, 400));
 		List<Task> tasks = new ArrayList<>();
@@ -38,9 +38,11 @@ public class MainLayout extends VerticalSplitPanel {
 		tasks.add(new Task(21, Type.RENOVATOR));
 		Calendar instance = Calendar.getInstance();
 		instance.add(Calendar.MONTH, 1);
-		projects.add(new Project("Villa", tasks, 200000, instance.getTime(),200, 400));
+		projects.add(new Project("Villa", tasks, 200000, instance.getTime(), 200, 400));
 		instance.add(Calendar.MONTH, 1);
-		projects.add(new Project("Cottage", tasks, 100000, instance.getTime(),100,0));
+		projects.add(new Project("Cottage", tasks, 100000, instance.getTime(), 100, 0));
+		instance.add(Calendar.MONTH, 1);
+		projects.add(new Project("Penthouse", tasks, 150000, instance.getTime(), 100, 0));
 		init();
 		teamView.drawSteps(teams);
 	}
