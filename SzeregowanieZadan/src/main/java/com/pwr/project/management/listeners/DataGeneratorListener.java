@@ -38,6 +38,7 @@ public class DataGeneratorListener implements ClickListener {
 		populateProjects(numberOfProjects);
 		projectManagementPresenter.synchronizeView();
 		ganttPresenter.updateGantt();
+		presenter.updateAlgorythmResults(ganttPresenter.getAlgorithmAnalyser());
 	}
 
 	private void populateProjects(int numberOfProjects) {

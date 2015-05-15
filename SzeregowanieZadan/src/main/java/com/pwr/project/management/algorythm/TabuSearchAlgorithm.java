@@ -1,7 +1,6 @@
 package com.pwr.project.management.algorythm;
 
 import com.google.common.collect.ImmutableList;
-import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.algorythm.analyser.ResultAnalyser;
 import com.pwr.project.management.exceptions.CannotCalculateException;
 import com.pwr.project.management.model.*;
@@ -22,34 +21,54 @@ public class TabuSearchAlgorithm implements Algorithm {
 		ImmutableList<Project> projectsBackup = ImmutableList.copyOf(projects);
 		List<Project> bestResult = null;
 		for (int i = 0; i < numberOfIterations; i++) {
-			int root = i % projectsBackup.size();
-			Set<Integer[]> tabus = new HashSet<>();
-			for (int j = 0; j < tabuSize; j++) {
-				projects = new ArrayList<>(projectsBackup);
-				Integer[] tabu = new Integer[projects.size() - 1];
+			projects = createTabuNeighbourhood(projectsBackup, i);
+			Set<ArrayList<String>> tabus = new HashSet<>();
+			int newTabuSize;
+			do {
+				int tabusSize = tabus.size();
 				//order projects
-				List<Project> projectsResult = new LinkedList<>();
-				projectsResult.add(projects.remove(root));
-				while (!projects.isEmpty()) {
-					int projectNumber = ((int) (Math.random() * projects.size()));
-					projectsResult.add(projects.remove(projectNumber));
-					tabu[projects.size()] = projectNumber;
-				}
-				if (tabus.contains(tabu)) {
+				projects = permuteProjects(projects, tabus);
+				newTabuSize = tabus.size();
+				if (tabusSize == newTabuSize) {
 					continue;
 				}
-				tabus.add(tabu);
 				//assign tasks
-				assignTasks(projectsResult, teams);
+				assignTasks(projects, teams);
 				//analizeResults
 				int profit = resultAnalyser.calculateProfit(teams, projectsBackup);
 				if (profit > maxProfit) {
 					maxProfit = profit;
-					bestResult = new ArrayList<>(projectsResult);
+					bestResult = new ArrayList<>(projects);
 				}
-			}
+			} while (newTabuSize < tabuSize);
 		}
 		assignTasks(bestResult, teams);
+	}
+
+	private List<Project> createTabuNeighbourhood(ImmutableList<Project> projectsBackup, int i) {
+		List<Project> projects = new ArrayList<>(projectsBackup.asList());
+		Project first = projects.remove(i % projectsBackup.size());
+		projects.add(0, first);
+		return projects;
+	}
+
+	private List<Project> permuteProjects(List<Project> projects, Set<ArrayList<String>> tabus) {
+		int projectToSwap = selectRandomProjectWihoutRoot(projects);
+		int project2ToSwap = selectRandomProjectWihoutRoot(projects);
+		while (projectToSwap == project2ToSwap) {
+			project2ToSwap = selectRandomProjectWihoutRoot(projects);
+		}
+		Collections.swap(projects, projectToSwap, project2ToSwap);
+		ArrayList<String> tabu = new ArrayList<>();
+		for (Project project : projects) {
+			tabu.add(project.getName());
+		}
+		tabus.add(tabu);
+		return projects;
+	}
+
+	private int selectRandomProjectWihoutRoot(List<Project> projects) {
+		return (int) (Math.random() * (projects.size() - 1) + 1);
 	}
 
 	private void assignTasks(List<Project> projects, List<Team> teams) {
@@ -126,7 +145,7 @@ public class TabuSearchAlgorithm implements Algorithm {
 		teams.add(new Team("MainRenovator", Type.RENOVATOR, 350));
 		teams.add(new Team("SecondaryRenovator", Type.RENOVATOR, 400));
 		long start = new Date().getTime();
-		new BasicFlowAlgorithm().serialize(projects, teams);
+		new TabuSearchAlgorithm().serialize(projects, teams);
 		long end = new Date().getTime();
 		System.out.println(end - start + "ms");
 	}
