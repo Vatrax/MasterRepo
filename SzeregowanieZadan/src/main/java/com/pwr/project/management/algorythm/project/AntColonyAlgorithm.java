@@ -37,7 +37,7 @@ public class AntColonyAlgorithm implements Algorithm {
 		numberOfIterations = projects.size();
 		int maxProfit = Integer.MIN_VALUE;
 		ImmutableList<Project> projectsBackup = ImmutableList.copyOf(projects);
-		List<Project> bestResult = null;
+		List<Project> bestResult = projects;
 		LOG.info("Start algorithm");
 		for (int i = 0; i < numberOfIterations; i++) {
 			LOG.info("Looking for phereomone");
@@ -92,7 +92,7 @@ public class AntColonyAlgorithm implements Algorithm {
 		teams.add(new Team("MainRenovator", Type.RENOVATOR, 350));
 		teams.add(new Team("SecondaryRenovator", Type.RENOVATOR, 400));
 		long start = new Date().getTime();
-		new TabuSearchAlgorithm().serialize(projects, teams);
+		new AntColonyAlgorithm().serialize(projects, teams);
 		long end = new Date().getTime();
 		System.out.println(end - start + "ms");
 		System.out.println(new ResultAnalyser().calculateProfit(teams, projects) + "$");
