@@ -1,6 +1,6 @@
 package com.pwr.project.management.presenter;
 
-import com.pwr.project.management.algorythm.Algorithm;
+import com.pwr.project.management.algorythm.project.Algorithm;
 import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Team;

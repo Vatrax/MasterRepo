@@ -1,7 +1,6 @@
 package com.pwr.project.management.listeners;
 
-import com.pwr.project.management.algorythm.Algorithm;
-import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
+import com.pwr.project.management.algorythm.project.Algorithm;
 import com.pwr.project.management.presenter.AlgorythmManagementPresenter;
 import com.pwr.project.management.presenter.GanttPresenter;
 import com.vaadin.data.Property.ValueChangeEvent;

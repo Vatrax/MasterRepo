@@ -1,6 +1,6 @@
 package com.pwr.project.management.ui.partial;
 
-import com.pwr.project.management.algorythm.Algorithm;
+import com.pwr.project.management.algorythm.project.Algorithm;
 import com.pwr.project.management.components.IntegerField;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
 import com.pwr.project.management.listeners.DataGeneratorListener;

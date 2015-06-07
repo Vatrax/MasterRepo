@@ -1,9 +1,9 @@
 package com.pwr.project.management.presenter;
 
-import com.pwr.project.management.algorythm.Algorithm;
-import com.pwr.project.management.algorythm.BasicFlowAlgorithm;
 import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
-import com.pwr.project.management.algorythm.TabuSearchAlgorithm;
+import com.pwr.project.management.algorythm.project.Algorithm;
+import com.pwr.project.management.algorythm.project.BasicFlowAlgorithm;
+import com.pwr.project.management.algorythm.project.TabuSearchAlgorithm;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
 import com.pwr.project.management.listeners.DataGeneratorListener;
 import com.pwr.project.management.model.Project;

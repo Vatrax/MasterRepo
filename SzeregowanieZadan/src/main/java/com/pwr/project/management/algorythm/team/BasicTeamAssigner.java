@@ -1,4 +1,4 @@
-package com.pwr.project.management.algorythm;
+package com.pwr.project.management.algorythm.team;
 
 import com.pwr.project.management.exceptions.CannotCalculateException;
 import com.pwr.project.management.model.AssignedTask;
@@ -9,12 +9,12 @@ import com.pwr.project.management.model.Team;
 import java.util.*;
 
 /**
- * Created by krzaczek on 22.01.15.
+ * Created by krzaczek on 6/7/15.
  */
-public class BasicFlowAlgorithm implements Algorithm {
+public class BasicTeamAssigner implements TeamAssigner {
 
 	@Override
-	public void serialize(List<Project> projects, List<Team> teams) {
+	public void assignTasks(List<Project> projects, List<Team> teams) {
 		clearTeamsTasks(teams);
 		for (Project project : projects) {
 			Collections.sort(project.getTasks());
@@ -67,5 +67,4 @@ public class BasicFlowAlgorithm implements Algorithm {
 		}
 		return bestTeam;
 	}
-
 }

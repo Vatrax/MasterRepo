@@ -1,6 +1,6 @@
 package com.pwr.project.management.algorythm.analyser;
 
-import com.pwr.project.management.algorythm.Algorithm;
+import com.pwr.project.management.algorythm.project.Algorithm;
 import com.pwr.project.management.model.AssignedTask;
 import com.pwr.project.management.model.Project;
 import com.pwr.project.management.model.Team;
@@ -8,7 +8,6 @@ import com.pwr.project.management.model.Team;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by krzaczek on 22.03.15.
