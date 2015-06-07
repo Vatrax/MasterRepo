@@ -2,6 +2,7 @@ package com.pwr.project.management.presenter;
 
 import com.pwr.project.management.algorythm.analyser.AlgorithmAnalyser;
 import com.pwr.project.management.algorythm.project.Algorithm;
+import com.pwr.project.management.algorythm.project.AntColonyAlgorithm;
 import com.pwr.project.management.algorythm.project.BasicFlowAlgorithm;
 import com.pwr.project.management.algorythm.project.TabuSearchAlgorithm;
 import com.pwr.project.management.listeners.AlgorithmChangeListener;
@@ -34,6 +35,7 @@ public class AlgorythmManagementPresenter {
 	private void populateAlgorithms() {
 		algorithms.add(new BasicFlowAlgorithm());
 		algorithms.add(new TabuSearchAlgorithm());
+		algorithms.add(new AntColonyAlgorithm());
 	}
 
 	public Layout createLayout() {
