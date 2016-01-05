@@ -68,7 +68,6 @@ public class Testing {
         for (int j = 0; j < numberOfProjects; j++) {
             projects.add(createProject(j + 1, numberOfProjects));
         }
-        Collections.shuffle(projects, new Random(System.nanoTime()));
         return projects;
     }
 
